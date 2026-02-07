@@ -54,7 +54,7 @@ export function Lookbook() {
                         {/* Editorial Card 2 (Offset) */}
                         <div className="relative aspect-square overflow-hidden rounded-[40px] border-acetate-gold">
                             <Image
-                                src="/images/shop-collage.jpg"
+                                src="/images/optiker innenraum.jpg"
                                 alt="Unser Geschäft in der Dresdner Altstadt"
                                 fill
                                 className="object-cover transition-transform duration-[1.5s] scale-110 group-hover:scale-100"
