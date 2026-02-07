@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 // --- IRIS REVEAL ---
@@ -19,6 +19,7 @@ function IrisReveal() {
 
 export function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const [videoLoaded, setVideoLoaded] = useState(false);
 
     const { scrollY } = useScroll();
     const yBackground = useTransform(scrollY, [0, 800], [0, 120]);
@@ -42,9 +43,10 @@ export function Hero() {
                     loop={true}
                     muted={true}
                     playsInline={true}
-                    preload="auto"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ opacity: 0.85 }}
+                    preload="metadata"
+                    onCanPlay={() => setVideoLoaded(true)}
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out"
+                    style={{ opacity: videoLoaded ? 0.85 : 0 }}
                 >
                     <source src="/video/glass.mp4" type="video/mp4" />
                 </video>
@@ -54,6 +56,7 @@ export function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-black/20" />
             </motion.div>
+
 
             {/* --- MAIN CONTENT --- */}
             <motion.div
