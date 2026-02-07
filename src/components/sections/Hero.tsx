@@ -38,10 +38,11 @@ export function Hero() {
                 style={{ y: yBackground, scale: scaleBackground }}
             >
                 <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                    autoPlay={true}
+                    loop={true}
+                    muted={true}
+                    playsInline={true}
+                    preload="auto"
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{ opacity: 0.85 }}
                 >
