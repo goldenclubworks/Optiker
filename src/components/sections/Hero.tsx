@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { ArrowRight, Eye } from "lucide-react";
 
 // --- IRIS REVEAL ---
 function IrisReveal() {
@@ -17,19 +19,29 @@ function IrisReveal() {
     );
 }
 
+// Spring config for buttery smooth scroll
+const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+
 export function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [videoLoaded, setVideoLoaded] = useState(false);
 
     const { scrollY } = useScroll();
-    const yBackground = useTransform(scrollY, [0, 800], [0, 120]);
-    const scaleBackground = useTransform(scrollY, [0, 800], [1, 1.08]);
-    const opacityContent = useTransform(scrollY, [0, 350], [1, 0]);
+
+    // Raw transforms
+    const yBackgroundRaw = useTransform(scrollY, [0, 800], [0, 80]);
+    const scaleBackgroundRaw = useTransform(scrollY, [0, 800], [1, 1.05]);
+    const opacityContentRaw = useTransform(scrollY, [0, 400], [1, 0]);
+
+    // Apply spring for buttery smooth feel
+    const yBackground = useSpring(yBackgroundRaw, springConfig);
+    const scaleBackground = useSpring(scaleBackgroundRaw, springConfig);
+    const opacityContent = useSpring(opacityContentRaw, springConfig);
 
     return (
         <section
             ref={containerRef}
-            className="relative h-[100dvh] w-full bg-black overflow-hidden"
+            className="relative h-[100dvh] min-h-[600px] w-full bg-black overflow-hidden"
         >
             <IrisReveal />
 
@@ -46,112 +58,117 @@ export function Hero() {
                     preload="metadata"
                     onCanPlay={() => setVideoLoaded(true)}
                     className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out"
-                    style={{ opacity: videoLoaded ? 0.85 : 0 }}
+                    style={{ opacity: videoLoaded ? 0.8 : 0 }}
                 >
                     <source src="/video/glass.mp4" type="video/mp4" />
                 </video>
 
                 {/* Cinematic gradient overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
-                <div className="absolute inset-0 bg-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />
             </motion.div>
-
 
             {/* --- MAIN CONTENT --- */}
             <motion.div
-                className="relative z-10 h-full w-full flex flex-col items-center justify-center px-4 md:px-6"
+                className="relative z-10 h-full w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8"
                 style={{ opacity: opacityContent }}
             >
-                {/* Eyebrow / Pre-Header - Elegant & Minimal */}
+                {/* Eyebrow */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20, letterSpacing: "0.5em" }}
-                    animate={{ opacity: 1, y: 0, letterSpacing: "0.25em" }}
-                    transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
-                    className="mb-8 md:mb-12 flex items-center gap-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.2 }}
+                    className="mb-6 sm:mb-8 md:mb-10"
                 >
-                    <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-                    <span className="text-[10px] md:text-xs font-medium uppercase text-white/80 tracking-[0.25em] drop-shadow-md">
+                    <span className="text-[10px] sm:text-[11px] font-medium uppercase text-white/60 tracking-[0.3em]">
                         Tradition trifft Innovation
                     </span>
-                    <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                 </motion.div>
 
-                {/* HEADLINE - MASSIVE & CINEMATIC */}
-                <div className="relative text-center z-20">
-                    {/* "SCHORCHT" - The Foundation */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 80, filter: "blur(20px)" }}
-                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative"
+                {/* HEADLINE */}
+                <div className="relative text-center">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 60 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-[clamp(3.5rem,12vw,10rem)] sm:text-[clamp(4rem,14vw,12rem)] leading-[0.85] font-editorial text-white uppercase tracking-[-0.03em]"
                     >
-                        <h1 className="text-[clamp(4.5rem,15vw,13rem)] leading-[0.85] font-editorial text-white uppercase tracking-[-0.03em] drop-shadow-2xl">
-                            SCHORCHT
-                        </h1>
-                    </motion.div>
+                        SCHORCHT
+                    </motion.h1>
 
-                    {/* "OPTIK" - The Elegance */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 60, scale: 1.1, filter: "blur(15px)" }}
-                        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-                        transition={{ duration: 1.4, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative -mt-3 md:-mt-8"
+                    <motion.h1
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-[clamp(3.5rem,12vw,10rem)] sm:text-[clamp(4rem,14vw,12rem)] leading-[0.85] font-serif italic text-red-brand tracking-[-0.02em] -mt-2 sm:-mt-4 md:-mt-6"
                     >
-                        <h1 className="text-[clamp(4.5rem,15vw,13rem)] leading-[0.85] font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-red-brand via-red-500 to-red-brand tracking-[-0.02em]">
-                            OPTIK
-                        </h1>
-                    </motion.div>
+                        OPTIK
+                    </motion.h1>
                 </div>
 
-                {/* Tagline - Refined & spaced */}
+                {/* Tagline */}
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5, delay: 1.4 }}
-                    className="mt-8 md:mt-14 text-xs md:text-base font-light text-white/60 max-w-md md:max-w-xl text-center leading-relaxed tracking-widest uppercase"
+                    transition={{ duration: 1, delay: 1.2 }}
+                    className="mt-6 sm:mt-8 md:mt-10 text-[11px] sm:text-xs md:text-sm text-white/50 tracking-[0.2em] uppercase"
                 >
-                    Zeit nehmen. Zeit haben. Für Ihre Augen.
+                    Zeit nehmen. Zeit haben.
                 </motion.p>
 
-                {/* CTA - Clean, Professional Buttons */}
+                {/* CTA - WOW Asymmetrical Design */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 1.8, ease: "easeOut" }}
-                    className="mt-10 md:mt-16 flex flex-col sm:flex-row gap-4 sm:gap-6 items-center w-full sm:w-auto px-6 sm:px-0"
+                    transition={{ duration: 0.8, delay: 1.6 }}
+                    className="mt-10 sm:mt-12 md:mt-16 flex flex-col sm:flex-row items-center gap-4 sm:gap-0"
                 >
-                    {/* Primary CTA */}
-                    <button className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-4 bg-white text-black font-semibold text-xs sm:text-[11px] tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-red-brand hover:text-white hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/10">
-                        Termin buchen
-                    </button>
+                    {/* Primary: Termin buchen - Pill with icon */}
+                    <Link
+                        href="/termin"
+                        className="group relative flex items-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-black rounded-full transition-all duration-300 hover:bg-red-brand hover:text-white hover:pr-10 sm:hover:pr-12"
+                    >
+                        <Eye className="w-4 h-4 sm:w-5 sm:h-5 opacity-60 group-hover:opacity-100 transition-opacity" />
+                        <span className="text-xs sm:text-[11px] font-semibold tracking-[0.15em] uppercase">
+                            Termin buchen
+                        </span>
+                        <ArrowRight className="w-4 h-4 absolute right-4 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    </Link>
 
-                    {/* Secondary CTA */}
-                    <button className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-4 border border-white/30 text-white/80 font-medium text-xs sm:text-[11px] tracking-[0.15em] uppercase rounded-full transition-all duration-300 hover:border-white hover:text-white hover:bg-white/5 active:scale-[0.98]">
-                        Kollektion ansehen
-                    </button>
+                    {/* Divider - Desktop only */}
+                    <div className="hidden sm:block w-12 md:w-16 h-px bg-white/20 mx-4 md:mx-6" />
+
+                    {/* Secondary: Kollektion - Text link with line */}
+                    <Link
+                        href="/brillen"
+                        className="group relative text-white/60 hover:text-white transition-colors"
+                    >
+                        <span className="text-xs sm:text-[11px] font-medium tracking-[0.15em] uppercase">
+                            Kollektion
+                        </span>
+                        <span className="absolute -bottom-1 left-0 w-full h-px bg-white/30 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                    </Link>
                 </motion.div>
             </motion.div>
 
             {/* Scroll Indicator */}
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.4 }}
-                transition={{ delay: 2.2, duration: 0.8 }}
-                className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+                animate={{ opacity: 0.5 }}
+                transition={{ delay: 2.5, duration: 0.8 }}
+                className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
             >
-                <span className="text-[8px] md:text-[9px] tracking-[0.2em] uppercase text-white/40 font-medium">Entdecken</span>
                 <motion.div
-                    animate={{ y: [0, 6, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-5 h-8 border border-white/20 rounded-full flex justify-center pt-1.5"
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-5 sm:w-6 h-8 sm:h-10 border border-white/30 rounded-full flex justify-center pt-2"
                 >
-                    <div className="w-1 h-2 bg-white/40 rounded-full" />
+                    <div className="w-1 h-2 bg-white/50 rounded-full" />
                 </motion.div>
             </motion.div>
 
-            {/* Subtle Film Grain */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-30" />
+            {/* Film Grain */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.025] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-30" />
         </section>
     );
 }
