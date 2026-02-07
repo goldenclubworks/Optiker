@@ -51,14 +51,47 @@ export function Lookbook() {
                             </div>
                         </div>
 
-                        {/* Editorial Card 2 (Offset) */}
-                        <div className="relative aspect-square overflow-hidden rounded-[40px] border-acetate-gold">
-                            <Image
-                                src="/images/optiker innenraum.jpg"
-                                alt="Unser Geschäft in der Dresdner Altstadt"
-                                fill
-                                className="object-cover transition-transform duration-[1.5s] scale-110 group-hover:scale-100"
-                            />
+                        {/* Shop Interior Showcase - Full Image Display */}
+                        <div className="relative group lg:ml-12">
+                            {/* Decorative frame inspired by eyewear aesthetics */}
+                            <div className="relative bg-gradient-to-br from-zinc-100 via-white to-zinc-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 p-4 md:p-6 rounded-[24px] shadow-2xl border border-zinc-200/50 dark:border-zinc-700/50">
+                                {/* Inner frame with lens-like corners */}
+                                <div className="relative overflow-hidden rounded-[16px] bg-zinc-50 dark:bg-zinc-950">
+                                    {/* The image container - aspect ratio that matches the collage */}
+                                    <div className="relative w-full" style={{ aspectRatio: '9/16' }}>
+                                        <Image
+                                            src="/images/optiker innenraum.jpg"
+                                            alt="Unser Geschäft in der Dresdner Altstadt"
+                                            fill
+                                            className="object-contain transition-transform duration-[1.5s] group-hover:scale-[1.02]"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Elegant caption bar */}
+                                <div className="mt-4 md:mt-6 flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded-full bg-red-brand/10 flex items-center justify-center">
+                                            <div className="w-3 h-3 rounded-full bg-red-brand" />
+                                        </div>
+                                        <div>
+                                            <p className="text-xs font-bold uppercase tracking-widest text-red-brand">Dresden Altstadt</p>
+                                            <p className="text-sm text-muted-foreground">Unser Geschäft</p>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-2xl md:text-3xl font-serif italic text-foreground">Schorcht</p>
+                                        <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Optik</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Decorative corner accents */}
+                            <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-red-brand rounded-tl-lg opacity-60" />
+                            <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-red-brand rounded-tr-lg opacity-60" />
+                            <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-red-brand rounded-bl-lg opacity-60" />
+                            <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-red-brand rounded-br-lg opacity-60" />
                         </div>
                     </div>
                 </div>
