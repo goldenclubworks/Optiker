@@ -75,7 +75,7 @@ export function Hero() {
                 </motion.div>
 
                 {/* HEADLINE - MASSIVE & CINEMATIC */}
-                <div className="relative text-center z-20 mix-blend-screen">
+                <div className="relative text-center z-20">
                     {/* "SCHORCHT" - The Foundation */}
                     <motion.div
                         initial={{ opacity: 0, y: 80, filter: "blur(20px)" }}
@@ -83,7 +83,7 @@ export function Hero() {
                         transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="relative"
                     >
-                        <h1 className="text-[clamp(3.5rem,13vw,11rem)] leading-[0.85] font-editorial text-white uppercase tracking-[-0.02em] drop-shadow-2xl">
+                        <h1 className="text-[clamp(4.5rem,15vw,13rem)] leading-[0.85] font-editorial text-white uppercase tracking-[-0.03em] drop-shadow-2xl">
                             SCHORCHT
                         </h1>
                     </motion.div>
@@ -93,9 +93,9 @@ export function Hero() {
                         initial={{ opacity: 0, y: 60, scale: 1.1, filter: "blur(15px)" }}
                         animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
                         transition={{ duration: 1.4, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative -mt-2 md:-mt-6"
+                        className="relative -mt-3 md:-mt-8"
                     >
-                        <h1 className="text-[clamp(3.5rem,13vw,11rem)] leading-[0.85] font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-red-brand via-red-500 to-red-brand tracking-tight drop-shadow-[0_0_35px_rgba(220,38,38,0.4)]">
+                        <h1 className="text-[clamp(4.5rem,15vw,13rem)] leading-[0.85] font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-red-brand via-red-500 to-red-brand tracking-[-0.02em]">
                             OPTIK
                         </h1>
                     </motion.div>
@@ -106,34 +106,26 @@ export function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1.5, delay: 1.4 }}
-                    className="mt-10 md:mt-16 text-sm md:text-lg font-light text-white/70 max-w-lg md:max-w-2xl text-center leading-relaxed tracking-wide"
+                    className="mt-8 md:mt-14 text-xs md:text-base font-light text-white/60 max-w-md md:max-w-xl text-center leading-relaxed tracking-widest uppercase"
                 >
-                    <span className="inline-block px-4 py-1 border-y border-white/10">
-                        ZEIT nehmen. ZEIT haben. Für Ihre Augen.
-                    </span>
+                    Zeit nehmen. Zeit haben. Für Ihre Augen.
                 </motion.p>
 
-                {/* CTA - Premium Glass Buttons */}
+                {/* CTA - Clean, Professional Buttons */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 1.8, ease: "easeOut" }}
-                    className="mt-12 md:mt-20 flex flex-col sm:flex-row gap-6 items-center"
+                    className="mt-10 md:mt-16 flex flex-col sm:flex-row gap-4 sm:gap-6 items-center w-full sm:w-auto px-6 sm:px-0"
                 >
-                    <button className="group relative px-10 py-4 md:px-12 md:py-5 rounded-full overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95">
-                        <div className="absolute inset-0 bg-white text-black font-bold tracking-[0.2em] uppercase text-[11px] flex items-center justify-center">
-                            <span className="relative z-10 transition-colors duration-500 group-hover:text-red-brand flex items-center gap-2">
-                                Termin buchen
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform group-hover:translate-x-1">
-                                    <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
+                    {/* Primary CTA */}
+                    <button className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-4 bg-white text-black font-semibold text-xs sm:text-[11px] tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-red-brand hover:text-white hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/10">
+                        Termin buchen
                     </button>
 
-                    <button className="text-[11px] font-medium tracking-[0.2em] uppercase text-white/60 hover:text-white transition-colors duration-300 relative group">
+                    {/* Secondary CTA */}
+                    <button className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-4 border border-white/30 text-white/80 font-medium text-xs sm:text-[11px] tracking-[0.15em] uppercase rounded-full transition-all duration-300 hover:border-white hover:text-white hover:bg-white/5 active:scale-[0.98]">
                         Kollektion ansehen
-                        <span className="absolute -bottom-2 left-0 w-0 h-px bg-white transition-all duration-500 group-hover:w-full" />
                     </button>
                 </motion.div>
             </motion.div>
