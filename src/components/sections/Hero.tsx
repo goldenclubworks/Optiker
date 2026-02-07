@@ -57,63 +57,83 @@ export function Hero() {
 
             {/* --- MAIN CONTENT --- */}
             <motion.div
-                className="relative z-10 h-full w-full flex flex-col items-center justify-center px-6"
+                className="relative z-10 h-full w-full flex flex-col items-center justify-center px-4 md:px-6"
                 style={{ opacity: opacityContent }}
             >
-                {/* Eyebrow / Pre-Header */}
+                {/* Eyebrow / Pre-Header - Elegant & Minimal */}
                 <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-                    className="mb-6 md:mb-10 flex items-center gap-4"
+                    initial={{ opacity: 0, y: 20, letterSpacing: "0.5em" }}
+                    animate={{ opacity: 1, y: 0, letterSpacing: "0.25em" }}
+                    transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+                    className="mb-8 md:mb-12 flex items-center gap-6"
                 >
-                    <div className="h-px w-8 md:w-12 bg-red-brand/60" />
-                    <span className="text-[10px] md:text-[11px] font-medium uppercase text-white/70 tracking-[0.25em]">
+                    <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                    <span className="text-[10px] md:text-xs font-medium uppercase text-white/80 tracking-[0.25em] drop-shadow-md">
                         Tradition trifft Innovation
                     </span>
-                    <div className="h-px w-8 md:w-12 bg-red-brand/60" />
+                    <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                 </motion.div>
 
-                {/* HEADLINE */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-center"
-                >
-                    <h1 className="text-[clamp(3rem,11vw,9rem)] leading-[0.9] font-editorial text-white uppercase tracking-tight">
-                        Sehen
-                    </h1>
-                    <h1 className="text-[clamp(3rem,11vw,9rem)] leading-[0.9] font-serif italic text-red-brand tracking-tight -mt-1 md:-mt-3 drop-shadow-[0_0_25px_rgba(189,34,34,0.35)]">
-                        erleben.
-                    </h1>
-                </motion.div>
+                {/* HEADLINE - MASSIVE & CINEMATIC */}
+                <div className="relative text-center z-20 mix-blend-screen">
+                    {/* "SCHORCHT" - The Foundation */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 80, filter: "blur(20px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative"
+                    >
+                        <h1 className="text-[clamp(3.5rem,13vw,11rem)] leading-[0.85] font-editorial text-white uppercase tracking-[-0.02em] drop-shadow-2xl">
+                            SCHORCHT
+                        </h1>
+                    </motion.div>
 
-                {/* Tagline */}
+                    {/* "OPTIK" - The Elegance */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 60, scale: 1.1, filter: "blur(15px)" }}
+                        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                        transition={{ duration: 1.4, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative -mt-2 md:-mt-6"
+                    >
+                        <h1 className="text-[clamp(3.5rem,13vw,11rem)] leading-[0.85] font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-red-brand via-red-500 to-red-brand tracking-tight drop-shadow-[0_0_35px_rgba(220,38,38,0.4)]">
+                            OPTIK
+                        </h1>
+                    </motion.div>
+                </div>
+
+                {/* Tagline - Refined & spaced */}
                 <motion.p
-                    initial={{ opacity: 0, y: 25 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9, delay: 1.2, ease: "easeOut" }}
-                    className="mt-8 md:mt-12 text-sm md:text-lg lg:text-xl font-light text-white/50 max-w-lg md:max-w-xl text-center leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.5, delay: 1.4 }}
+                    className="mt-10 md:mt-16 text-sm md:text-lg font-light text-white/70 max-w-lg md:max-w-2xl text-center leading-relaxed tracking-wide"
                 >
-                    ZEIT nehmen. ZEIT haben.
-                    <br />
-                    <span className="text-white/80">Für Ihre Augen. Für Ihre Wünsche.</span>
+                    <span className="inline-block px-4 py-1 border-y border-white/10">
+                        ZEIT nehmen. ZEIT haben. Für Ihre Augen.
+                    </span>
                 </motion.p>
 
-                {/* CTA */}
+                {/* CTA - Premium Glass Buttons */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 1.6, ease: "easeOut" }}
-                    className="mt-10 md:mt-14 flex flex-col sm:flex-row gap-4"
+                    transition={{ duration: 1, delay: 1.8, ease: "easeOut" }}
+                    className="mt-12 md:mt-20 flex flex-col sm:flex-row gap-6 items-center"
                 >
-                    <button className="group relative px-8 py-4 md:px-12 md:py-5 rounded-full bg-red-brand text-white font-semibold tracking-[0.15em] uppercase text-[10px] md:text-[11px] overflow-hidden transition-all duration-500 hover:shadow-[0_0_35px_rgba(189,34,34,0.45)]">
-                        <span className="relative z-10">Termin vereinbaren</span>
-                        <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                    <button className="group relative px-10 py-4 md:px-12 md:py-5 rounded-full overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95">
+                        <div className="absolute inset-0 bg-white text-black font-bold tracking-[0.2em] uppercase text-[11px] flex items-center justify-center">
+                            <span className="relative z-10 transition-colors duration-500 group-hover:text-red-brand flex items-center gap-2">
+                                Termin buchen
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform group-hover:translate-x-1">
+                                    <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </span>
+                        </div>
                     </button>
-                    <button className="px-8 py-4 md:px-10 md:py-5 rounded-full border border-white/20 text-white/70 font-medium tracking-[0.1em] uppercase text-[10px] md:text-[11px] hover:bg-white/5 hover:border-white/40 transition-all duration-300">
-                        Kollektionen entdecken
+
+                    <button className="text-[11px] font-medium tracking-[0.2em] uppercase text-white/60 hover:text-white transition-colors duration-300 relative group">
+                        Kollektion ansehen
+                        <span className="absolute -bottom-2 left-0 w-0 h-px bg-white transition-all duration-500 group-hover:w-full" />
                     </button>
                 </motion.div>
             </motion.div>

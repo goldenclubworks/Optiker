@@ -150,11 +150,36 @@
     @apply border-border outline-ring/50;
   }
 
+  /* Ultra-smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+    /* Momentum-based scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Reduced motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   body {
     @apply bg-background text-foreground tracking-tight overflow-x-hidden;
     font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* GPU acceleration hints for smooth scroll */
+    will-change: scroll-position;
   }
 
   /* Premium Typography */
