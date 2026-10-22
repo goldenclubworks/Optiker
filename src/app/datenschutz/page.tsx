@@ -12,7 +12,7 @@ export default function DatenschutzPage() {
     return (
         <>
             <Header />
-            <main className="section-padding">
+            <main id="main-content" className="section-padding">
                 <div className="container-premium">
                     <div className="mx-auto max-w-3xl">
                         <h1 className="text-4xl font-bold tracking-tight">

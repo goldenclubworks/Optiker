@@ -36,7 +36,7 @@ export const contact = {
 export const openingHours = [
   { day: "Montag", hours: "09:00 – 18:00" },
   { day: "Dienstag", hours: "09:00 – 18:00" },
-  { day: "Mittwoch", hours: "Geschlossen" },
+  { day: "Mittwoch", hours: "09:00 – 18:00" },
   { day: "Donnerstag", hours: "09:00 – 18:00" },
   { day: "Freitag", hours: "09:00 – 18:00" },
   { day: "Samstag", hours: "Nach Vereinbarung" },

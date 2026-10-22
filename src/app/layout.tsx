@@ -1,60 +1,18 @@
 import type { Metadata } from "next";
-import { Outfit, Geist_Mono } from "next/font/google";
+import { Manrope, Cormorant_Garamond, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const manrope = Manrope({ variable: "--font-outfit", subsets: ["latin"], display: "swap" });
+const editorial = Cormorant_Garamond({ variable: "--font-cormorant", subsets: ["latin"], weight: ["400", "500", "600"], style: ["normal", "italic"], display: "swap" });
+const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Schorcht Optik Dresden – Brillen, so individuell wie du",
-    template: "%s | Schorcht Optik",
-  },
-  description:
-    "Persönliche Brillenberatung in Dresden. Sehtest, Stilberatung, Kontaktlinsen und Werkstattservice – alles unter einem Dach.",
-  keywords: [
-    "Optiker Dresden",
-    "Brillen Dresden",
-    "Sehtest Dresden",
-    "Kontaktlinsen Dresden",
-    "Stilberatung Brillen",
-  ],
-  authors: [{ name: "Schorcht Optik" }],
-  openGraph: {
-    type: "website",
-    locale: "de_DE",
-    siteName: "Schorcht Optik",
-  },
+  title: { default: "Optik Schorcht · Gutes Sehen. Großer Stil. · Dresden", template: "%s | Optik Schorcht Dresden" },
+  description: "Unabhängige Augenoptik in Dresden seit 1936. Persönliche Stilberatung, präzise Sehanalyse und Brillen mit Charakter. Entdecken Sie Ihren neuen Blick.",
+  openGraph: { type: "website", locale: "de_DE", siteName: "Optik Schorcht", title: "Optik Schorcht · Gutes Sehen. Großer Stil.", description: "In Dresden verwurzelt. Für Ihren Blick nach vorn. Persönliche Augenoptik seit 1936." },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="de" suppressHydrationWarning>
-      <body className={`${outfit.variable} ${geistMono.variable} font-sans antialiased`}>
-        {children}
-        <Toaster
-          position="top-center"
-          richColors
-          closeButton
-          toastOptions={{
-            duration: 4000,
-          }}
-        />
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="de"><body id="top" className={`${manrope.variable} ${editorial.variable} ${mono.variable} font-sans antialiased`}><a className="skip-link" href="#main-content">Zum Inhalt springen</a>{children}<Toaster position="top-center" richColors closeButton /></body></html>;
 }
-
