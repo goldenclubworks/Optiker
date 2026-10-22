@@ -2,50 +2,54 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Dialog } from "radix-ui";
-import { useState } from "react";
-
-const links = [
-  { label: "Brillen & Stil", href: "/brillen" },
-  { label: "Sehen & Service", href: "/leistungen" },
-  { label: "Unser Haus", href: "/#unser-haus" },
-  { label: "Kontakt", href: "/kontakt" },
-];
-
-export function Brand({ light = false }: { light?: boolean }) {
-  return (
-    <Link href="/" className={`atelier-brand${light ? " atelier-brand-light" : ""}`} aria-label="Optik Schorcht – Startseite">
-      <span className="brand-symbol" aria-hidden="true">{Array.from({ length: 9 }, (_, i) => <i key={i} />)}</span>
-      <span className="brand-type"><span>SCHORCHT</span><small>OPTIK · DRESDEN · SEIT 1936</small></span>
-    </Link>
-  );
-}
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { blickNavigation } from "@/content/blick";
+import { Brand } from "./Brand";
 
 export function Header() {
   const pathname = usePathname();
+  const [active,setActive] = useState("ueberblick");
+  useEffect(()=>{
+    if(pathname!=="/")return;
+    const sections=Array.from(document.querySelectorAll("section[id]"));
+    const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting)setActive(entry.target.id);},{rootMargin:"-100px 0px -60% 0px",threshold:0});
+    sections.forEach(section=>observer.observe(section));return()=>observer.disconnect();
+  },[pathname]);
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="atelier-header">
-      <div className="atelier-shell header-inner">
+    <header className="site-header">
+      <div className="site-shell header-layout">
         <Brand />
-        <nav className="desktop-nav" aria-label="Hauptnavigation">
-          {links.map((link) => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined}>{link.label}</Link>)}
+        <nav className="main-navigation" aria-label="Hauptnavigation">
+          {blickNavigation.map((item) => (
+            <Link key={item.href} href={item.href} aria-current={pathname === "/" && active === item.href.slice(2) ? "location" : undefined}>
+              <span>{item.label}</span><small>{item.description}</small>
+            </Link>
+          ))}
         </nav>
-        <Link className="atelier-button header-booking" href="/termin">Zeit für Sie <ArrowUpRight size={16} /></Link>
+        <div className="header-contact">
+          <span className="micro-label">DRESDEN. SEIT 1936.</span>
+          <Link href="/#termin" className="solid-link">Termin vereinbaren <ArrowUpRight size={16} /></Link>
+        </div>
         <Dialog.Root open={open} onOpenChange={setOpen}>
-          <Dialog.Trigger asChild><button className="mobile-menu-button" aria-label="Menü öffnen"><Menu size={25} strokeWidth={1.4} /></button></Dialog.Trigger>
+          <Dialog.Trigger asChild><button className="menu-trigger" aria-label="Menü öffnen"><Menu size={27} strokeWidth={1.5} /></button></Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="menu-overlay" />
             <Dialog.Content className="mobile-navigation" aria-describedby={undefined}>
-              <Dialog.Title className="eyebrow">OPTIK SCHORCHT · DRESDEN</Dialog.Title>
-              <Dialog.Close className="mobile-close" aria-label="Menü schließen"><X size={27} strokeWidth={1.4} /></Dialog.Close>
+              <Dialog.Title className="micro-label">OPTIK SCHORCHT / DRESDEN</Dialog.Title>
+              <Dialog.Close className="menu-close" aria-label="Menü schließen"><X size={28} strokeWidth={1.5} /></Dialog.Close>
               <nav aria-label="Mobile Hauptnavigation">
-                {links.map((link, i) => <Link key={link.href} href={link.href} onClick={() => setOpen(false)}><span>0{i + 1}</span>{link.label}<ArrowUpRight size={25} /></Link>)}
+                {blickNavigation.map((item) => (
+                  <Link key={item.href} href={item.href} onClick={() => setOpen(false)} aria-current={pathname === "/" && active === item.href.slice(2) ? "location" : undefined}>
+                    <small>{item.number}</small><span>{item.label}</span><ArrowUpRight size={24} strokeWidth={1.5} />
+                  </Link>
+                ))}
               </nav>
-              <Link href="/termin" className="atelier-button" onClick={() => setOpen(false)}>Termin vereinbaren <ArrowUpRight size={18} /></Link>
-              <p className="menu-address">Kleine Brüdergasse 1<br />01067 Dresden</p>
+              <Link href="/#termin" className="solid-link" onClick={() => setOpen(false)}>Termin vereinbaren <ArrowUpRight size={17} /></Link>
+              <Link href="/#kontakt" className="mobile-contact" onClick={() => setOpen(false)}>Kleine Brüdergasse 1 · 01067 Dresden</Link>
             </Dialog.Content>
           </Dialog.Portal>
         </Dialog.Root>

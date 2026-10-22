@@ -126,7 +126,7 @@ export function ServicesEditorial() {
 
                                 {/* Asymmetric helper text */}
                                 <p className="mt-12 text-sm md:text-base text-muted-foreground max-w-sm ml-auto md:mr-24 leading-relaxed italic">
-                                    "Handwerkskunst, die man nicht nur sieht, sondern fühlt. Für den perfekten Augenblick."
+                                    &ldquo;Handwerkskunst, die man nicht nur sieht, sondern fühlt. Für den perfekten Augenblick.&rdquo;
                                 </p>
                             </div>
 

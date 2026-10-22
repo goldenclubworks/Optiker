@@ -61,9 +61,11 @@ export const legalInfo = {
 export const navigation = {
   main: [
     { label: "Überblick", href: "/" },
-    { label: "Leistungen", href: "/leistungen" },
-    { label: "Brillen", href: "/brillen" },
-    { label: "Kontakt", href: "/kontakt" },
+    { label: "Weitblick", href: "/weitblick" },
+    { label: "Einblick", href: "/einblick" },
+    { label: "Anblick", href: "/anblick" },
+    { label: "Rundblick", href: "/rundblick" },
+    { label: "Durchblick", href: "/durchblick" },
   ],
   legal: [
     { label: "Impressum", href: "/impressum" },

@@ -2,7 +2,6 @@
 
 import { steps } from "@/content/site";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { motion } from "framer-motion";
 
 export function Steps() {
     return (

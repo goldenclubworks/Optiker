@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local sculpt reviews, browser screenshots and machine-specific review helpers
+/docs/hero-sculpt/

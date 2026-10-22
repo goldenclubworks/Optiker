@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import { motion, useScroll, useSpring, useTransform, MotionValue } from "framer-motion";
+import { useScroll, useSpring, useTransform } from "framer-motion";
 
 // =============================================================================
 // SMOOTH SCROLL PROVIDER
@@ -13,16 +12,6 @@ interface SmoothScrollProviderProps {
 }
 
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
-    // Create smooth scroll progress
-    const { scrollYProgress } = useScroll();
-
-    // Apply spring physics for ultra-smooth feel
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    });
-
     return <>{children}</>;
 }
 
@@ -47,7 +36,7 @@ export function useSmoothScrollProgress() {
 // =============================================================================
 
 interface ParallaxOptions {
-    offset?: [string, string];
+    offset?: NonNullable<Parameters<typeof useScroll>[0]>['offset'];
     speed?: number;
 }
 
@@ -59,7 +48,7 @@ export function useParallax(
 
     const { scrollYProgress } = useScroll({
         target: ref,
-        offset: offset as any
+        offset
     });
 
     // Apply spring for smoothness
