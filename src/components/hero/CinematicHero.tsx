@@ -27,7 +27,7 @@ export function CinematicHero({initialView=0,capture=false}:{initialView?:number
     return()=>media.removeEventListener('change',update);
   },[]);
   useEffect(()=>{
-    if(!canvasHost.current||(!capture&&reduced===null))return;
+    if(!canvasHost.current||reduced===null)return;
     setReady(false);setFailed(false);
     const mobile=window.matchMedia('(max-width: 800px)').matches;
     const start=capture?initialView:mobile||reduced?2:initialView;
@@ -69,11 +69,15 @@ export function CinematicHero({initialView=0,capture=false}:{initialView?:number
   function selectView(index:number){setActive(index);scene.current?.setView(index,!!reduced);}
   return <div className={`hero-sequence ${capture?'is-capture':''}`} ref={sequence} data-static={!!reduced||failed}>
     <section ref={hero} className={`cinematic-hero ${capture?'hero-capture':''}`} id="ueberblick" aria-label="Optik Schorcht – Sehen erleben">
-      {!capture&&<picture className="hero-poster"><source media="(max-width:800px)" srcSet={`/images/hero/${views[active].image}-mobile.webp`}/>{/* Native picture selects the correct pre-rendered WebGL composition. */}<img src={`/images/hero/${views[active].image}.webp`} width="1440" height="880" alt="" fetchPriority="high" /></picture>}
+      {!capture&&<picture className="hero-poster"><source media="(max-width:800px)" srcSet={`/images/hero/${views[active].image}-mobile.webp`}/>{/* Native picture selects the correct pre-rendered WebGL composition. */}<img src={`/images/hero/${views[active].image}.webp`} width="1440" height="1000" alt="" fetchPriority="high" /></picture>}
       <div ref={canvasHost} className={`hero-canvas ${ready&&!failed?'is-ready':''}`} onPointerMove={event=>{if(event.pointerType==='touch')return;const box=event.currentTarget.getBoundingClientRect();scene.current?.setPointer((event.clientX-box.left)/box.width-.5,(event.clientY-box.top)/box.height-.5);}} onPointerLeave={()=>scene.current?.setPointer(0,0)}/>
       <div className="hero-shade" aria-hidden="true"/>
-      <div className="site-shell cinematic-content"><div className="hero-kicker"><span className="small-red-dot"/><span>UNABHÄNGIGE AUGENOPTIK / DRESDEN</span></div><h1>Optik<br/><span>Schorcht.</span></h1><p className="cinematic-claim">Sehen erleben.</p><p className="cinematic-description">Ein eigener Stil. Ein neuer Blick.<br/>Und jemand, der sich Zeit für Sie nimmt.</p><div className="cinematic-actions"><Link href="/#termin" className="solid-link">Zeit für Ihren Blick <ArrowUpRight size={17}/></Link><Link href="/#einblick" className="hero-explore">Schorcht entdecken <ArrowDown size={15}/></Link></div></div>
-      <div className="site-shell hero-bottom-bar"><div className="hero-scene-caption"><span className="micro-label">0{active+1} / PERSPEKTIVEN</span><p>{views[active].caption}</p></div><div className="hero-view-controls" aria-label="Perspektive der Brille wählen">{views.map((view,i)=><button key={view.name} onClick={()=>selectView(i)} aria-pressed={active===i}><span>0{i+1}</span>{view.name}</button>)}</div><span className="hero-since">DRESDEN.<br/>SEIT 1936.</span></div>
+      <div className="site-shell cinematic-content">
+        <div className="hero-topline"><span>Ein eigener Stil.<br/>Ein neuer Blick.</span><span>Unabhängige Augenoptik<br/>Dresden. Seit 1936.</span></div>
+        <h1><span className="hero-title-first">Sehen.</span><span className="hero-title-last">erleben.</span></h1>
+        <div className="hero-invitation"><p>Für Ihre Augen.<br/>Und für alles, was Sie ausmacht.</p><Link href="/#termin" className="hero-booking">Zeit für Ihren Blick <span><ArrowUpRight size={19}/></span></Link></div>
+      </div>
+      <div className="site-shell hero-bottom-bar"><Link href="/#einblick" className="hero-explore"><ArrowDown size={16}/><span>Schorcht entdecken</span></Link><div className="hero-view-controls" aria-label="Perspektive der Brille wählen">{views.map((view,i)=><button key={view.name} onClick={()=>selectView(i)} aria-pressed={active===i}><span>0{i+1}</span>{view.name}</button>)}</div><span className="hero-scene-caption">{views[active].caption}</span></div>
     </section>
   </div>;
 }

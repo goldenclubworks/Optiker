@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Manrope, Barlow_Condensed, Geist_Mono } from "next/font/google";
+import { Manrope, Inter_Tight, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 
 const sans = Manrope({ variable: "--font-outfit", subsets: ["latin"], display: "swap" });
-const display = Barlow_Condensed({ variable: "--font-display", subsets: ["latin"], weight: ["500", "600", "700"], display: "swap" });
+const display = Inter_Tight({ variable: "--font-display", subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap" });
 const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {

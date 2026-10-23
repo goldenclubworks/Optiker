@@ -1,42 +1,478 @@
 import Image from "next/image";
-import { ArrowDown, ArrowUpRight, Plus } from "lucide-react";
+import { ArrowUpRight, Plus } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CinematicHero } from "@/components/hero/CinematicHero";
 import { ImageGallery } from "@/components/ImageGallery";
+import { FrameCollection } from "@/components/FrameCollection";
+import { EditorialMotion } from "@/components/EditorialMotion";
 import { AppointmentForm } from "@/components/AppointmentForm";
 import { storeImages, blickPages } from "@/content/blick";
 import { contact } from "@/content/site";
 
-function SectionLabel({number,name,detail}:{number:string;name:string;detail:string}) {
-  return <div className="one-section-label"><span><b>{number}</b> / {name}</span><span>{detail}</span></div>;
+function Chapter({
+  number,
+  name,
+  detail,
+}: {
+  number: string;
+  name: string;
+  detail?: string;
+}) {
+  return (
+    <div className="chapter-label">
+      <span>
+        <span>{number}</span> / {name}
+      </span>
+      {detail && <span>{detail}</span>}
+    </div>
+  );
 }
-const frameImages=[
-  {file:'IMG_9002.jpg',name:'Material mit Charakter.',sub:'HOLZ / NATÜRLICH EIGEN',alt:'Helle Holzbrille mit unterschiedlichen Holzmustern aus dem Sortiment von Optik Schorcht'},
-  {file:'anblick-1.jpg',name:'Ecken. Kanten. Persönlichkeit.',sub:'ACETAT / FARBE BEKENNEN',alt:'Markante blaue Acetatfassungen aus der ursprünglichen Schorcht-Bildwelt'},
-  {file:'laredo_compos_02_600x800.jpg',name:'Leicht in der Form.',sub:'METALL / FEINE LINIEN',alt:'Filigrane Metallfassungen in mehreren Farben'},
+const services = [
+  {
+    title: "Wir richten es.",
+    subtitle: "Werkstatt & Anpassung",
+    text: "Lockere Schrauben oder unangenehme Druckstellen? Kommen Sie vorbei. Wir kümmern uns um Ihre Brille – von der ersten Anpassung bis zum Service im Alltag.",
+  },
+  {
+    title: "In Ruhe entscheiden.",
+    subtitle: "Beratung mit Zeit",
+    text: "Fühlen Sie sich wohl. Seien Sie unser Gast. Bei einem Kaffee oder Espresso nehmen wir uns Zeit für Ihre Wünsche. Eine Auswahl mit nach Hause nehmen oder ein Hausbesuch bei Bedarf? Sprechen Sie uns an.",
+  },
+  {
+    title: "Gut sehen. Gut fühlen.",
+    subtitle: "Gläser & Verträglichkeit",
+    text: "Gute Gläser müssen zu Ihrem Leben passen. Zu SEIKO-Markengläsern, Verträglichkeitsgarantie und den passenden Möglichkeiten beraten wir Sie persönlich.",
+  },
+  {
+    title: "Eine gute Möglichkeit.",
+    subtitle: "Das Brillenabo",
+    text: "Eine neue Brille mit einem passenden Zahlungsmodell: Die Möglichkeiten und Konditionen besprechen wir in Ruhe. Die Informationen können Sie vorab als PDF lesen.",
+    link: true,
+  },
 ];
+
 export default function HomePage() {
-  return <><Header/><main id="main-content">
-    <CinematicHero/>
-    <div className="values-strip"><div className="site-shell"><span>Gute Gläser.</span><i/><span>Eigener Stil.</span><i/><span>Zeit für Sie.</span><span className="micro-label">SEHEN ERLEBEN. SEIT 1936.</span></div></div>
-    <section id="einblick" className="one-section site-shell">
-      <SectionLabel number="01" name="EINBLICK" detail="PERSÖNLICH. IN DRESDENS MITTE."/>
-      <div className="one-section-intro"><h2>Zeit nehmen.<br/><span className="red-text">Zeit haben.</span></h2><div><p className="section-lead">Tradition trifft Innovation.<br/>Und Sie treffen auf offene Ohren.</p><p>Sehen und Aussehen. Beides habe ich für Sie im Blick. In der Kleinen Brüdergasse nehmen wir uns Zeit für Ihre Augen, Ihre Wünsche und Ihre neue Brille.</p></div></div>
-      <div className="store-editorial"><ImageGallery images={storeImages}/><aside><span className="micro-label">BEI MIR.</span><blockquote>„Ich will,<br/>dass Sie<br/><em>Sehen erleben.</em>“</blockquote><div><strong>Joachim Skorupa</strong><p>Augenoptikermeister & Inhaber</p></div><p>Ein eigener Blick auf gutes Sehen. Mit Freude am Handwerk und einem offenen Blick für Neues.</p><a href="#termin" className="line-link">Lernen wir uns kennen <ArrowUpRight size={17}/></a></aside></div>
-      <details id="geschichte" className="history-disclosure"><summary><span className="micro-label">RÜCKBLICK / 1936 – HEUTE</span><span>Ein Name. Viele Kapitel.</span><Plus size={23}/></summary><div className="history-content"><figure><Image src="/images/schorcht/Freiberger-Strasse.jpg" width={800} height={600} alt="Historische Aufnahme von Optiker Schorcht in der Freiberger Straße"/><figcaption>Ein Kapitel unserer Geschichte: die Freiberger Straße.</figcaption></figure><div>{blickPages.ruckblick.paragraphs.map((paragraph,i)=><p key={i}>{paragraph}</p>)}</div></div></details>
-    </section>
-    <section id="anblick" className="one-section frames-section">
-      <div className="site-shell"><SectionLabel number="02" name="ANBLICK" detail="IHR GESICHT. MEINE INSPIRATION."/><div className="one-section-intro"><h2>Aussehen.<br/><span className="red-text">Durchsehen.</span></h2><div><p className="section-lead">Ihre Brille. Ihr wichtigstes Accessoire.</p><p>Markant, sportlich oder elegant. Wir finden eine Fassung, die zu Ihrem Gesicht, Ihrem Alltag und Ihren Wünschen passt. Entscheidend ist Ihr gutes Gefühl beim Tragen.</p><a href="#termin" className="line-link">Den eigenen Stil finden <ArrowUpRight size={17}/></a></div></div><div className="frame-grid">{frameImages.map((image,i)=><figure key={image.file}><div className="frame-image"><Image src={`/images/schorcht/${image.file}`} fill sizes="(max-width:700px) 90vw, 31vw" alt={image.alt}/><span className="micro-label">0{i+1}</span></div><figcaption><span className="micro-label">{image.sub}</span><h3>{image.name}</h3></figcaption></figure>)}</div><div className="frames-closing"><span>Sie wählen. Ich berate.</span><p>Gute Gläser. Durchdachte Fassungen.<br/>Und eine Anpassung, die zu Ihnen passt.</p><a href="#durchblick" aria-label="Weiter zur Sehanalyse"><ArrowDown size={26} strokeWidth={1}/></a></div></div>
-    </section>
-    <section id="durchblick" className="one-section vision-section"><div className="site-shell"><SectionLabel number="03" name="DURCHBLICK" detail="PRÄZISION FÜR IHREN ALLTAG."/><div className="vision-layout"><div className="vision-copy"><span className="micro-label">3D-REFRAKTION / VISIONIX 120</span><h2>Ihre Augen.<br/><span>Meine<br/>Profession.</span></h2><p className="section-lead">Gutes Sehen beginnt mit genauem Hinsehen.</p><p>Am Bildschirm, beim Lesen, im Auto oder beim Sport: Ihre Augen leisten jeden Tag viel. Mit präziser Brillenglasbestimmung und dem Blick auf Ihre Sehgewohnheiten finden wir die passende Lösung.</p><a href="#termin" className="line-link">Zeit für eine Sehanalyse <ArrowUpRight size={17}/></a></div><figure className="vision-visual"><span className="vision-cross cross-a" aria-hidden="true">+</span><span className="vision-cross cross-b" aria-hidden="true">+</span><div><Image src="/images/schorcht/visionix.png" width={649} height={800} sizes="(max-width:800px) 85vw, 42vw" alt="Visionix 120 Messgerät für die Sehanalyse bei Optik Schorcht"/></div><figcaption><span>01 / MESSEN</span><span>02 / VERSTEHEN</span><span>03 / GUT SEHEN</span></figcaption></figure></div></div></section>
-    <section id="rundblick" className="one-section site-shell"><SectionLabel number="04" name="RUNDBLICK" detail="KONTAKT MIT DEM FAST UNSICHTBAREN."/><div className="contacts-layout"><figure className="contact-lens-image"><Image src="/images/schorcht/71578755.jpg" fill sizes="(max-width:800px) 90vw, 45vw" alt="Eine transparente Kontaktlinse auf einer Fingerspitze"/><figcaption className="micro-label">KLEIN IM FORMAT. INDIVIDUELL IN DER ANPASSUNG.</figcaption></figure><div className="contact-lens-copy"><h2>Fast<br/><span className="red-text">unsichtbar.</span></h2><p className="section-lead">Sehen ohne Brille.<br/>Für jeden Tag. Oder manchmal.</p><p>Weiche, formstabile oder multifokale Kontaktlinsen: Am Anfang stehen persönliche Beratung, Hornhaut-Topographie und eine individuelle Anpassung. Auch danach bleiben wir mit regelmäßigen Kontrollen für Sie da.</p><div className="lens-options"><span>Weich.</span><span>Formstabil.</span><span>Multifokal.</span></div><a href="#termin" className="line-link">Passende Kontaktlinsen finden <ArrowUpRight size={17}/></a></div></div></section>
-    <section id="weitblick" className="service-section"><div className="service-title"><div><span className="micro-label">05 / WEITBLICK</span><h2>Wir sind<br/>für Sie da.</h2><p>Ihr Sehkomfort ist unser Ziel.<br/>Ihre Zufriedenheit unser Anspruch.</p><span className="service-asterisk" aria-hidden="true">✳</span></div></div><div className="service-list">{[
-      {title:'Werkstatt & Anpassung',text:'Lockere Schrauben oder unangenehme Druckstellen? Kommen Sie vorbei. Wir kümmern uns um Ihre Brille – von der ersten Anpassung bis zum Service im Alltag.'},
-      {title:'In Ruhe entscheiden',text:'Fühlen Sie sich wohl. Seien Sie unser Gast. Bei einem Kaffee oder Espresso nehmen wir uns Zeit für Ihre Wünsche. Eine Auswahl mit nach Hause nehmen oder ein Hausbesuch bei Bedarf? Sprechen Sie uns an.'},
-      {title:'Gläser & Verträglichkeit',text:'Gute Gläser müssen zu Ihrem Leben passen. Zu SEIKO-Markengläsern, Verträglichkeitsgarantie und den passenden Möglichkeiten beraten wir Sie persönlich.'},
-      {title:'Das Brillenabo',text:'Eine neue Brille mit einem passenden Zahlungsmodell: Die Möglichkeiten und Konditionen besprechen wir in Ruhe. Die Informationen können Sie vorab als PDF lesen.',link:true},
-    ].map((service,i)=><details key={service.title} open={i===0}><summary><span className="micro-label">0{i+1}</span><h3>{service.title}</h3><Plus size={22} strokeWidth={1}/></summary><div><p>{service.text}</p>{service.link&&<a href="https://optik-schorcht.de/wp-content/uploads/2026/08/Brillen_clever_finanzieren.pdf" target="_blank" rel="noreferrer" className="line-link">Brillenabo / PDF öffnen <ArrowUpRight size={16}/></a>}</div></details>)}<a href="#kontakt" className="line-link">Wir sprechen persönlich darüber <ArrowUpRight size={17}/></a></div></section>
-    <section id="kontakt" className="one-section site-shell contact-section"><SectionLabel number="06" name="KONTAKT" detail="KLEINE BRÜDERGASSE 1 / DRESDEN"/><div className="one-section-intro"><h2>Ein guter Blick<br/>beginnt mit <span className="red-text">Zeit.</span></h2><div><p className="section-lead">Kommen Sie herein.<br/>Wir freuen uns auf Sie.</p><p>Mitten in Dresden, im lebendigen Haus.<br/>Für eine neue Brille, klare Sicht oder eine kleine Anpassung zwischendurch.</p></div></div><div className="location-layout"><figure><Image src="/images/schorcht/einblick-1.jpg" fill sizes="(max-width:800px) 90vw, 60vw" alt="Das lebendige Haus mit Optik Schorcht in der Kleinen Brüdergasse in Dresden"/><figcaption className="micro-label">DRESDENS MITTE. UNSER ZUHAUSE.</figcaption></figure><div className="location-information"><span className="micro-label">OPTIK SCHORCHT</span><h3>Kleine Brüdergasse 1<br/><span>01067 Dresden</span></h3><a className="line-link" href={contact.googleMapsUrl} target="_blank" rel="noreferrer">Anfahrt planen <ArrowUpRight size={16}/></a><dl><div><dt>Montag – Freitag</dt><dd>09:00 – 18:00 Uhr</dd></div><div><dt>Samstag</dt><dd>nach Vereinbarung</dd></div></dl><a className="location-phone" href={`tel:${contact.phone}`}>{contact.phoneDisplay} <ArrowUpRight size={19}/></a><a className="location-email" href={`mailto:${contact.email}`}>{contact.email}</a></div></div><div id="termin" className="one-booking"><div className="booking-intro"><span className="micro-label">ZEIT FÜR IHREN BLICK.</span><h2>Lernen wir<br/>uns <span className="red-text">kennen.</span></h2><p>Erzählen Sie uns, was Sie sich wünschen. Ihren Termin stimmen wir persönlich mit Ihnen ab.</p><a href={`tel:${contact.phone}`} className="line-link">Lieber direkt anrufen <ArrowUpRight size={16}/></a></div><AppointmentForm/></div></section>
-  </main><Footer compact/></>;
+  return (
+    <>
+      <Header />
+      <main id="main-content">
+        <CinematicHero />
+        <section
+          id="einblick"
+          className="intro-section paper-section"
+          aria-labelledby="intro-heading"
+        >
+          <div className="site-shell">
+            <Chapter
+              number="01"
+              name="Einblick"
+              detail="Persönlich. Seit 1936."
+            />
+            <h2 id="intro-heading" className="statement" data-reveal>
+              Eine Brille, die
+              <br />
+              zu <span>Ihnen</span> gehört.
+            </h2>
+            <div className="intro-bottom">
+              <span className="small-heading">
+                Tradition trifft
+                <br />
+                Innovation.
+              </span>
+              <p>
+                Sehen und Aussehen. Beides habe ich für Sie im Blick. Mit Freude
+                am Handwerk, einem offenen Ohr und Zeit für das, was Ihnen
+                wichtig ist.
+              </p>
+              <a href="#termin" className="text-link">
+                Lernen wir uns kennen <ArrowUpRight size={18} />
+              </a>
+            </div>
+          </div>
+          <div className="store-stage" data-reveal>
+            <ImageGallery images={storeImages} />
+            <div className="store-quote">
+              <span>ZEIT NEHMEN. ZEIT HABEN.</span>
+              <blockquote>
+                „Ich will, dass Sie
+                <br />
+                Sehen erleben.“
+              </blockquote>
+              <p>
+                Joachim Skorupa
+                <br />
+                <span>Augenoptikermeister & Inhaber</span>
+              </p>
+            </div>
+          </div>
+          <div className="site-shell">
+            <div className="store-footnote">
+              <span>Unser Geschäft. Ihr Raum für einen neuen Blick.</span>
+              <span>Kleine Brüdergasse 1 · Dresden</span>
+            </div>
+            <details id="geschichte" className="history-disclosure">
+              <summary>
+                <span className="chapter-index">1936 — HEUTE</span>
+                <span>Ein Name. Viele Kapitel.</span>
+                <Plus size={22} strokeWidth={1} />
+              </summary>
+              <div className="history-content">
+                <figure>
+                  <Image
+                    src="/images/schorcht/Freiberger-Strasse.jpg"
+                    width={800}
+                    height={600}
+                    alt="Historische Aufnahme des Geschäfts Optiker Schorcht in der Freiberger Straße"
+                  />
+                  <figcaption>
+                    Ein Kapitel unserer Geschichte: die Freiberger Straße.
+                  </figcaption>
+                </figure>
+                <div>
+                  {blickPages.ruckblick.paragraphs.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section
+          id="anblick"
+          className="frames-section paper-section"
+          aria-labelledby="frames-heading"
+        >
+          <div className="site-shell">
+            <Chapter
+              number="02"
+              name="Anblick"
+              detail="Ihr Gesicht. Meine Inspiration."
+            />
+            <div className="collection-heading">
+              <h2 id="frames-heading" data-reveal>
+                Nicht irgendeine.
+                <br />
+                <span>Ihre.</span>
+              </h2>
+              <div>
+                <p>
+                  Markant, sportlich oder elegant.
+                  <br />
+                  Wir finden Ihren eigenen Stil.
+                </p>
+                <span className="small-heading">Sie wählen. Ich berate.</span>
+              </div>
+            </div>
+          </div>
+          <FrameCollection />
+        </section>
+
+        <section
+          id="durchblick"
+          className="precision-section"
+          aria-labelledby="precision-heading"
+        >
+          <div className="site-shell">
+            <Chapter
+              number="03"
+              name="Durchblick"
+              detail="Präzision für Ihren Alltag."
+            />
+            <div className="precision-layout">
+              <div className="precision-copy">
+                <span className="small-heading">
+                  Ihre Augen.
+                  <br />
+                  Meine Profession.
+                </span>
+                <h2 id="precision-heading" data-reveal>
+                  Genau
+                  <br />
+                  Ihr Blick.
+                </h2>
+                <p>
+                  Eine passende Brille beginnt mit genauem Hinsehen. Mit
+                  präziser Brillenglasbestimmung und dem Blick auf Ihre
+                  Sehgewohnheiten finden wir Ihre Lösung.
+                </p>
+                <a href="#termin" className="text-link">
+                  Sehanalyse anfragen <ArrowUpRight size={18} />
+                </a>
+              </div>
+              <figure className="precision-image">
+                <span
+                  className="measurement-corner corner-tl"
+                  aria-hidden="true"
+                />
+                <span
+                  className="measurement-corner corner-tr"
+                  aria-hidden="true"
+                />
+                <span
+                  className="measurement-corner corner-bl"
+                  aria-hidden="true"
+                />
+                <span
+                  className="measurement-corner corner-br"
+                  aria-hidden="true"
+                />
+                <Image
+                  src="/images/schorcht/visionix.png"
+                  width={649}
+                  height={800}
+                  sizes="(max-width:800px) 90vw, 44vw"
+                  alt="Visionix 120 für die persönliche Sehanalyse bei Optik Schorcht"
+                />
+                <figcaption>
+                  <span>VISIONIX 120</span>
+                  <span>3D-REFRAKTION</span>
+                </figcaption>
+              </figure>
+            </div>
+            <div className="precision-steps">
+              <div>
+                <span>01</span>
+                <h3>Verstehen.</h3>
+                <p>
+                  Ihre Wünsche. Ihre Sehgewohnheiten.
+                  <br />
+                  Ihr Alltag.
+                </p>
+              </div>
+              <div>
+                <span>02</span>
+                <h3>Messen.</h3>
+                <p>
+                  Präzise Brillenglasbestimmung.
+                  <br />
+                  Mit Zeit für Genauigkeit.
+                </p>
+              </div>
+              <div>
+                <span>03</span>
+                <h3>Abstimmen.</h3>
+                <p>
+                  Beim Lesen, am Bildschirm,
+                  <br />
+                  im Auto oder beim Sport.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="rundblick"
+          className="contacts-section paper-section"
+          aria-labelledby="contacts-heading"
+        >
+          <div className="site-shell">
+            <Chapter
+              number="04"
+              name="Rundblick"
+              detail="Kontakt mit dem fast Unsichtbaren."
+            />
+            <div className="contacts-layout">
+              <div className="lens-study" data-reveal>
+                <span className="lens-study-label">Klein im Format.</span>
+                <figure>
+                  <Image
+                    src="/images/schorcht/71578755.jpg"
+                    fill
+                    sizes="(max-width:800px) 85vw, 40vw"
+                    alt="Eine transparente Kontaktlinse auf einer Fingerspitze"
+                  />
+                </figure>
+                <span className="lens-study-caption">
+                  Individuell in der Anpassung.
+                </span>
+              </div>
+              <div className="contacts-copy">
+                <h2 id="contacts-heading" data-reveal>
+                  Fast unsichtbar.
+                  <br />
+                  <span>Ganz Sie.</span>
+                </h2>
+                <p>
+                  Sehen ohne Brille. Für jeden Tag oder manchmal. Mit
+                  persönlicher Beratung, Hornhaut-Topographie und individueller
+                  Anpassung finden wir die passenden Kontaktlinsen für Ihre
+                  Augen.
+                </p>
+                <div className="lens-types">
+                  <span>Weich.</span>
+                  <span>Formstabil.</span>
+                  <span>Multifokal.</span>
+                </div>
+                <p className="contacts-aftercare">
+                  Auch danach bleiben wir mit regelmäßigen Kontrollen und den
+                  passenden Pflegemitteln für Sie da.
+                </p>
+                <a href="#termin" className="text-link">
+                  Kontaktlinsen kennenlernen <ArrowUpRight size={18} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="weitblick"
+          className="care-section paper-section"
+          aria-labelledby="care-heading"
+        >
+          <div className="site-shell">
+            <Chapter
+              number="05"
+              name="Weitblick"
+              detail="Service. Sicherheit. Ein gutes Gefühl."
+            />
+            <h2 id="care-heading" data-reveal>
+              Wir sind für Sie da.
+              <br />
+              <span>Auch danach.</span>
+            </h2>
+            <div className="care-layout">
+              <figure className="care-image">
+                <Image
+                  src="/images/schorcht/start04.jpg"
+                  fill
+                  sizes="(max-width:800px) 100vw, 32vw"
+                  alt="Beratungsplätze und Empfang im Geschäft von Optik Schorcht"
+                />
+                <figcaption>
+                  Ihr Sehkomfort ist unser Ziel.
+                  <br />
+                  Ihre Zufriedenheit unser Anspruch.
+                </figcaption>
+              </figure>
+              <div className="service-list">
+                {services.map((service, i) => (
+                  <details key={service.title} open={i === 0}>
+                    <summary>
+                      <span>0{i + 1}</span>
+                      <div>
+                        <small>{service.subtitle}</small>
+                        <h3>{service.title}</h3>
+                      </div>
+                      <Plus size={25} strokeWidth={1} />
+                    </summary>
+                    <div className="service-detail">
+                      <p>{service.text}</p>
+                      {service.link && (
+                        <a
+                          href="https://optik-schorcht.de/wp-content/uploads/2026/08/Brillen_clever_finanzieren.pdf"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-link"
+                        >
+                          Brillenabo / PDF öffnen <ArrowUpRight size={16} />
+                        </a>
+                      )}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="kontakt"
+          className="location-section paper-section"
+          aria-labelledby="location-heading"
+        >
+          <div className="site-shell">
+            <Chapter
+              number="06"
+              name="Kontakt"
+              detail="Zu Hause in Dresdens Mitte."
+            />
+          </div>
+          <div className="location-layout">
+            <figure>
+              <Image
+                src="/images/schorcht/einblick-1.jpg"
+                fill
+                sizes="(max-width:800px) 100vw, 58vw"
+                alt="Das lebendige Haus in der Kleinen Brüdergasse mit Optik Schorcht in Dresden"
+              />
+              <figcaption>Kleine Brüdergasse 1. Unser Zuhause.</figcaption>
+            </figure>
+            <div className="location-information">
+              <span className="small-heading">Kommen Sie herein.</span>
+              <h2 id="location-heading" data-reveal>
+                Mitten
+                <br />
+                in Dresden.
+              </h2>
+              <p>
+                Kleine Brüdergasse 1<br />
+                01067 Dresden · das lebendige Haus
+              </p>
+              <a
+                className="text-link"
+                href={contact.googleMapsUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Anfahrt planen <ArrowUpRight size={18} />
+              </a>
+              <dl>
+                <div>
+                  <dt>Montag – Freitag</dt>
+                  <dd>09:00 – 18:00 Uhr</dd>
+                </div>
+                <div>
+                  <dt>Samstag</dt>
+                  <dd>nach Vereinbarung</dd>
+                </div>
+              </dl>
+              <a className="location-phone" href={`tel:${contact.phone}`}>
+                {contact.phoneDisplay} <ArrowUpRight size={23} />
+              </a>
+              <a className="location-email" href={`mailto:${contact.email}`}>
+                {contact.email}
+              </a>
+            </div>
+          </div>
+        </section>
+        <section
+          id="termin"
+          className="appointment-section"
+          aria-labelledby="appointment-heading"
+        >
+          <div className="site-shell">
+            <Chapter
+              number="07"
+              name="Zeit für Ihren Blick"
+              detail="Persönlich. Und ganz in Ruhe."
+            />
+            <div className="appointment-layout">
+              <div className="booking-intro">
+                <h2 id="appointment-heading" data-reveal>
+                  Sehen
+                  <br />
+                  wir uns?
+                </h2>
+                <p>
+                  Für einen neuen Blick braucht es
+                  <br />
+                  manchmal nur ein erstes Gespräch.
+                </p>
+                <a href={`tel:${contact.phone}`} className="text-link">
+                  Lieber direkt anrufen <ArrowUpRight size={18} />
+                </a>
+              </div>
+              <AppointmentForm />
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer compact />
+      <EditorialMotion />
+    </>
+  );
 }

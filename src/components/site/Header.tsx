@@ -10,6 +10,12 @@ import { Brand } from "./Brand";
 
 export function Header() {
   const pathname = usePathname();
+  const [overHero,setOverHero] = useState(pathname === "/");
+  useEffect(()=>{
+    const update=()=>{const hero=document.getElementById("ueberblick");setOverHero(pathname === "/" && !!hero && hero.getBoundingClientRect().bottom>100);};
+    update();window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);
+    return()=>{window.removeEventListener("scroll",update);window.removeEventListener("resize",update);};
+  },[pathname]);
   const [active,setActive] = useState("ueberblick");
   useEffect(()=>{
     if(pathname!=="/")return;
@@ -20,7 +26,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="site-header">
+    <header className="site-header" data-over-hero={overHero}>
       <div className="site-shell header-layout">
         <Brand />
         <nav className="main-navigation" aria-label="Hauptnavigation">

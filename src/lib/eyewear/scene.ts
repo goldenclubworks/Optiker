@@ -10,7 +10,7 @@ export const HERO_VIEWS = [
 
 export async function createHeroScene(host: HTMLElement, onReady: () => void, initialView=0): Promise<HeroScene> {
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color("#e2e1da");
+  scene.background = new THREE.Color("#792b39");
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -45,12 +45,12 @@ export async function createHeroScene(host: HTMLElement, onReady: () => void, in
   scene.add(key); scene.add(new THREE.HemisphereLight("#ffffff", "#716358", .6));
   const rimLight=new THREE.DirectionalLight('#c35c6c',1.8);rimLight.position.set(2,2,-4);scene.add(rimLight);
   const edgeLight=new THREE.DirectionalLight('#fff9e8',1.1);edgeLight.position.set(5,1,2);scene.add(edgeLight);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.ShadowMaterial({ color: "#423c35", opacity: .14 }));
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.ShadowMaterial({ color: "#423c35", opacity: .22 }));
   floor.rotation.x = -Math.PI/2; floor.position.y=-1.55;floor.receiveShadow=true; scene.add(floor);
   let width = 1, height = 1, view = initialView, destination = initialView, visible = true, disposed = false, raf = 0, lastTime=0, renderCount=0, ready=false;
   let pointerX = 0, pointerY = 0;
   const target = new THREE.Vector3();
-  const observer = new ResizeObserver(entries => { width=entries[0].contentRect.width;height=entries[0].contentRect.height; if(width<1||height<1)return; renderer.setPixelRatio(Math.min(window.devicePixelRatio,width<760?1.25:1.5));renderer.setSize(width,height);camera.setViewOffset(width,height,width<760?0:-width*.2,width<760?height*.1:0,width,height);wake(); });
+  const observer = new ResizeObserver(entries => { width=entries[0].contentRect.width;height=entries[0].contentRect.height; if(width<1||height<1)return; renderer.setPixelRatio(Math.min(window.devicePixelRatio,width<760?1.25:1.5));renderer.setSize(width,height);camera.setViewOffset(width,height,width<760?0:-width*.23,width<760?height*.1:0,width,height);wake(); });
   observer.observe(host);
   function wake(){if(!raf&&!disposed&&visible)raf=requestAnimationFrame(draw);}
   function draw(time:number) {
@@ -64,7 +64,7 @@ export async function createHeroScene(host: HTMLElement, onReady: () => void, in
       const a=HERO_VIEWS[index],b=HERO_VIEWS[index+1];
       camera.position.set(THREE.MathUtils.lerp(a.camera[0],b.camera[0],t),THREE.MathUtils.lerp(a.camera[1],b.camera[1],t),THREE.MathUtils.lerp(a.camera[2],b.camera[2],t));
       target.set(THREE.MathUtils.lerp(a.target[0],b.target[0],t),THREE.MathUtils.lerp(a.target[1],b.target[1],t),THREE.MathUtils.lerp(a.target[2],b.target[2],t));
-      if(width<760)camera.position.sub(target).multiplyScalar(1-Math.max(0,view-1)*.2).add(target);
+      if(width<760)camera.position.sub(target).multiplyScalar(1-Math.max(0,view-1)*.32).add(target);
       camera.lookAt(target);
       const rotationY=-.08+pointerX*.025,rotationX=-.05+pointerY*.012;
       model.root.rotation.y=THREE.MathUtils.lerp(model.root.rotation.y,rotationY,.18);model.root.rotation.x=THREE.MathUtils.lerp(model.root.rotation.x,rotationX,.18);
