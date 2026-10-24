@@ -16,6 +16,8 @@ const sans = Archivo({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  // Nicht vorladen: Die Serifenschrift für Titel und Fließtext hat Vorrang.
+  preload: false,
 });
 // Schmale Schrift für Etiketten und Jahreszahlen – wie auf dem alten Ladenschild.
 const narrow = Archivo_Narrow({

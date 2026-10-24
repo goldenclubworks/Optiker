@@ -82,6 +82,24 @@ Im Google-Unternehmensprofil sollten Adresse, Telefonnummer und Öffnungszeiten 
 - **Schriften** (Source Serif 4, Archivo, Archivo Narrow, Courier Prime) werden beim Build eingebunden und von der eigenen Domain geladen.
 - **Handy:** feste Leiste mit „Anrufen · Termin · Route“ am unteren Rand.
 
+### Animationen: „Scharfstellen“
+
+Alle Bewegungen kommen aus dem Thema Sehen. Die Bausteine liegen in `src/components/motion/`.
+
+| Wo | Was passiert | Datei |
+| --- | --- | --- |
+| Startbild | Der Laden liegt unscharf im Hintergrund. Ein Brillenglas mit Phoropter-Skala zeigt ihn scharf und folgt der Maus. | `HeroLens.tsx` |
+| Vier Blicke | Ein Rundglas wechselt beim Scrollen die „Linse“, die Skala dreht den aktiven Blick nach oben. | `Phoropter.tsx` |
+| Brillen | Eine Lupe zeigt jedes Detail der Fassung. | `Loupe.tsx` |
+| Geschichte | Der Abschnitt bleibt stehen, die Kapitel ziehen seitlich vorbei, die Archivfotos „entwickeln“ sich. | `Darkroom.tsx` |
+| Anfahrt | Die Sehtafel wird Zeile für Zeile scharf; Knopf „Brille aufsetzen / abnehmen“. | `Sehtafel.tsx` |
+| Termin | Das Punktraster aus dem Logo reagiert auf die Maus. | `DotField.tsx` |
+| Überschriften, Fotos | kommen beim Scrollen aus der Unschärfe | `FocusReveal.tsx` |
+| Footer | Die Altstadt-Skizze zeichnet sich ins Bild. | `DrawIn.tsx` |
+
+Wer in seinem Gerät „Bewegung reduzieren“ eingestellt hat, sieht alles statisch und vollständig.
+Auf dem Handy entfallen Maus-Effekte; die Geschichte läuft dort normal von oben nach unten.
+
 ### Aufbau
 
 ```

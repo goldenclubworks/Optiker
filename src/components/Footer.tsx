@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import { DrawIn } from "@/components/motion/DrawIn";
 import { contact, hoursShort, site } from "@/content/site";
 
 export function Footer() {
   return (
     <footer className="site-footer">
       {/* Handgezeichnete Silhouette der Altstadt aus dem Fundus von Optik Schorcht */}
-      <Image className="skyline" src="/images/laden/skyline.png" width={1100} height={694} alt="" sizes="(max-width: 780px) 100vw, 780px" />
+      <DrawIn>
+        <Image className="skyline" src="/images/laden/skyline.png" width={1100} height={694} alt="" sizes="(max-width: 780px) 100vw, 780px" />
+      </DrawIn>
       <div className="footer-body">
         <div className="shell footer-grid">
           <div>
