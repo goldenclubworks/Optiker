@@ -1,350 +1,288 @@
 // =============================================================================
-// OPTIK SCHORCHT – CENTRALIZED SITE CONTENT
+// ALLE INHALTE DER WEBSITE AN EINER STELLE
+// -----------------------------------------------------------------------------
+// Texte, Öffnungszeiten, Telefonnummer usw. werden nur hier geändert.
+// Einfach den Text zwischen den Anführungszeichen "…" anpassen und speichern.
+// Stellen mit PLATZHALTER sind noch zu prüfen (siehe README).
 // =============================================================================
 
-export const siteConfig = {
-  name: "OPTIK SCHORCHT",
-  claim: "Sehen erleben.",
-  description:
-    "Tradition trifft Innovation. Persönliche Beratung in Dresden – ZEIT nehmen, ZEIT haben. Für Ihre Augen.",
-  url: "https://www.optik-schorcht.de",
+export const site = {
+  name: "Optik Schorcht",
+  url: "https://optik-schorcht.de",
   owner: "Joachim Skorupa",
   ownerTitle: "Augenoptikermeister",
+  founded: 1936,
+  claim: "Sehen erleben.",
 } as const;
-
-// -----------------------------------------------------------------------------
-// Contact & Location
-// -----------------------------------------------------------------------------
 
 export const contact = {
   phone: "+493514901510",
-  phoneDisplay: "0351 / 49 01 510",
+  phoneDisplay: "0351 49 01 510",
   email: "optik.schorcht@euronet-server.com",
-  address: {
-    street: "Kleine Brüdergasse 1",
-    building: "das lebendige Haus",
-    zip: "01067",
-    city: "Dresden",
-    full: "Kleine Brüdergasse 1 (das lebendige Haus), 01067 Dresden",
-  },
-  googleMapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Optik+Schorcht+Kleine+Brüdergasse+1+Dresden",
-  bookingUrl:
-    "https://www.sehen.de/augenoptiker-suche/dresden/01067/augenoptik-schorcht/terminanfrage/",
+  street: "Kleine Brüdergasse 1",
+  building: "im Lebendigen Haus",
+  zip: "01067",
+  city: "Dresden",
+  district: "Altstadt",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Optik+Schorcht+Kleine+Br%C3%BCdergasse+1+01067+Dresden",
 } as const;
 
+// Öffnungszeiten. "from"/"to" im 24-Stunden-Format, null = keine festen Zeiten.
+// day: 1 = Montag … 6 = Samstag, 0 = Sonntag
 export const openingHours = [
-  { day: "Montag", hours: "09:00 – 18:00" },
-  { day: "Dienstag", hours: "09:00 – 18:00" },
-  { day: "Mittwoch", hours: "09:00 – 18:00" },
-  { day: "Donnerstag", hours: "09:00 – 18:00" },
-  { day: "Freitag", hours: "09:00 – 18:00" },
-  { day: "Samstag", hours: "Nach Vereinbarung" },
-  { day: "Sonntag", hours: "Geschlossen" },
+  { day: 1, label: "Montag", from: "09:00", to: "18:00" },
+  { day: 2, label: "Dienstag", from: "09:00", to: "18:00" },
+  { day: 3, label: "Mittwoch", from: "09:00", to: "18:00" },
+  { day: 4, label: "Donnerstag", from: "09:00", to: "18:00" },
+  { day: 5, label: "Freitag", from: "09:00", to: "18:00" },
+  { day: 6, label: "Samstag", from: null, to: null, note: "nach Vereinbarung" },
+  { day: 0, label: "Sonntag", from: null, to: null, note: "geschlossen" },
 ] as const;
 
-// Legal info for Impressum
-export const legalInfo = {
-  ustId: "DE 140 192 670",
-  chamber: "Handwerkskammer Dresden",
-  chamberAddress: "Am Lagerplatz 8, 01099 Dresden",
-  chamberUrl: "https://www.hwk-dresden.de/",
-  profession: "Augenoptikermeister",
-  professionRegulation: "Handwerksordnung",
-  professionRegulationUrl: "https://www.gesetze-im-internet.de/hwo/index.html",
-} as const;
+export const hoursShort = [
+  { days: "Mo – Fr", time: "9 – 18 Uhr" },
+  { days: "Samstag", time: "nach Vereinbarung" },
+] as const;
+
+export const navigation = [
+  { label: "Sehtest", href: "/#durchblick" },
+  { label: "Brillen", href: "/#anblick" },
+  { label: "Kontaktlinsen", href: "/#rundblick" },
+  { label: "Service", href: "/#weitblick" },
+  { label: "Geschichte", href: "/#geschichte" },
+  { label: "Anfahrt", href: "/#besuch" },
+] as const;
 
 // -----------------------------------------------------------------------------
-// Navigation (inspired by "Blick" theme from original)
-// -----------------------------------------------------------------------------
-
-export const navigation = {
-  main: [
-    { label: "Überblick", href: "/" },
-    { label: "Weitblick", href: "/weitblick" },
-    { label: "Einblick", href: "/einblick" },
-    { label: "Anblick", href: "/anblick" },
-    { label: "Rundblick", href: "/rundblick" },
-    { label: "Durchblick", href: "/durchblick" },
-  ],
-  legal: [
-    { label: "Impressum", href: "/impressum" },
-    { label: "Datenschutz", href: "/datenschutz" },
-  ],
-} as const;
-
-// -----------------------------------------------------------------------------
-// Hero Section
+// Startseite
 // -----------------------------------------------------------------------------
 
 export const hero = {
-  headline: "Sehen erleben.",
-  subline:
-    "Tradition trifft Innovation. ZEIT nehmen. ZEIT haben. Für Ihre Augen. Für Ihre Wünsche.",
-  ownerQuote: "Ich will, dass Sie Sehen erleben.",
-  owner: "Joachim Skorupa",
-  cta: {
-    primary: { label: "Termin vereinbaren", href: contact.bookingUrl },
-    secondary: { label: "Anrufen", href: `tel:${contact.phone}` },
+  kicker: "Augenoptik in der Dresdner Altstadt · seit 1936",
+  intro:
+    "Ich bin Joachim Skorupa, Augenoptikermeister. In der Kleinen Brüdergasse nehme ich mir Zeit für Ihre Augen: für den Sehtest, die passende Brille und alles, was danach kommt.",
+  image: {
+    src: "/images/laden/lampen-theke.jpg",
+    width: 1600,
+    height: 1851,
+    alt: "Die gelbe Brillenwand bei Optik Schorcht mit Pendelleuchten und Holzschränken",
   },
-  trustItems: [
-    "Qualität",
-    "Funktion",
-    "Sicherheit",
-    "Verlässlichkeit",
-  ],
+  caption: "Unsere Brillenwand. Kleine Brüdergasse 1.",
 } as const;
 
-// -----------------------------------------------------------------------------
-// Trust Bar (Features from old site)
-// -----------------------------------------------------------------------------
+export const letter = {
+  heading: "ZEIT nehmen. ZEIT haben.",
+  paragraphs: [
+    "Eine gute Brille entsteht nicht zwischen Tür und Angel. Deshalb setzen wir uns erst einmal hin. Selters, Saft, Kaffee oder Espresso? Dann erzählen Sie mir, wie Sie sehen, wo Sie lesen, wie lange Sie am Bildschirm sitzen und was Sie an Ihrer alten Brille gestört hat.",
+    "Danach messe ich genau, zeige Ihnen Fassungen, die zu Ihrem Gesicht passen, und sage Ihnen auch ehrlich, wenn etwas nicht passt. Ich berate. Sie entscheiden.",
+    "Optik Schorcht gibt es in Dresden seit 1936. Ich führe das Geschäft seit 1989 und freue mich bis heute über jeden, der wiederkommt. Danke für Ihr Vertrauen und Ihre Empfehlung.",
+  ],
+  image: {
+    src: "/images/laden/lampen-plaetze.jpg",
+    width: 1600,
+    height: 1849,
+    alt: "Beratungsplätze mit Spiegeln und Brillenauswahl unter warmem Licht",
+  },
+} as const;
 
-export const trustFeatures = [
-  {
-    icon: "Clock",
-    title: "Zeit für Sie",
-    description: "Wir nehmen uns Zeit. Fühlen Sie sich wohl.",
-  },
-  {
-    icon: "Shield",
-    title: "24 Monate Garantie",
-    description: "Verträglichkeitsgarantie. Unser Versprechen.",
-  },
-  {
-    icon: "Home",
-    title: "Hausbesuch",
-    description: "Bei Bedarf kommen wir gern zu Ihnen.",
-  },
-  {
-    icon: "Wrench",
-    title: "Werkstatt-Service",
-    description: "Lockere Schrauben? Wir richten es.",
-  },
-  {
-    icon: "CreditCard",
-    title: "BRILLENABO",
-    description: "Zinslos in 12 oder 24 Raten bezahlen.",
-  },
-] as const;
+export type Service = {
+  id: string;
+  name: string;
+  topic: string;
+  lead: string;
+  text: string[];
+  points: string[];
+  image: { src: string; width: number; height: number; alt: string; fit?: "contain" };
+  cta: string;
+};
 
-// -----------------------------------------------------------------------------
-// Services (from old site pages)
-// -----------------------------------------------------------------------------
-
-export const services = [
+// Die vier „Blicke“ – so hießen die Bereiche schon auf der alten Website.
+export const services: Service[] = [
   {
     id: "durchblick",
-    icon: "Eye",
-    title: "Durchblick – Seh Analyse",
-    shortDescription: "3D-Refraktion für ein neues Seherlebnis",
-    description:
-      "Brillenglasbestimmung in einer neuen Dimension. Visionix 120 – wellenfrontgestützte Messung für mehr Sehschärfe, mehr Kontrast, komfortables Sehen.",
-    benefits: [
-      "Visionix 120 3D-Refraktion",
-      "Mehr Sehschärfe & Kontrast",
-      "Für Sport, Arbeit, PC, Auto",
+    name: "Durchblick",
+    topic: "Sehtest & Sehanalyse",
+    lead: "Ihre Augen. Meine Profession.",
+    text: [
+      "Bevor wir über Fassungen sprechen, messe ich Ihre Augen genau. Mit dem Visionix 120 bestimmen wir Ihre Brillenglaswerte per 3D-Refraktion – wellenfrontgestützt, schnell und ohne Hektik.",
+      "Genauso wichtig ist, wie Sie Ihre Augen brauchen: beim Lesen, am Bildschirm, im Auto, beim Sport oder in der Sonne. Daraus ergibt sich das richtige Glas.",
     ],
-    href: "/leistungen#durchblick",
+    points: ["3D-Refraktion mit Visionix 120", "Sehgewohnheiten im Alltag", "Gleitsicht, Arbeitsplatz, Sport"],
+    image: {
+      src: "/images/schorcht/visionix.png",
+      width: 800,
+      height: 600,
+      alt: "Das Messgerät Visionix 120 für die Sehanalyse",
+      fit: "contain",
+    },
+    cta: "Sehtest vereinbaren",
   },
   {
     id: "anblick",
-    icon: "Sparkles",
-    title: "Anblick – Stilberatung",
-    shortDescription: "Ihr Gesicht. Meine Inspiration.",
-    description:
-      "Aussehen. Durchsehen. Ich suche, was Sie haben wollen. Markant. Sportlich. Elegant. Ihre neue Brille – Ihr wichtigstes Accessoire.",
-    benefits: [
-      "Persönliche Typberatung",
-      "Gesichtsform-Analyse",
-      "Sie wählen. Ich berate.",
+    name: "Anblick",
+    topic: "Brillen & Stilberatung",
+    lead: "Ihr Gesicht. Meine Inspiration.",
+    text: [
+      "Markant, sportlich oder elegant: Ich suche mit Ihnen eine Brille, die zu Ihrem Gesicht und zu Ihrem Alltag passt. Sie ist das Erste, was andere an Ihnen sehen – da darf sie ruhig gefallen.",
+      "In den Schubladen liegen Fassungen aus Acetat, Metall und Holz, darunter Holzbrillen von Leja. Gläser fertigen wir mit Markengläsern von SEIKO.",
     ],
-    href: "/leistungen#anblick",
+    points: ["Acetat, Metall, Holz", "Holzbrillen von Leja", "SEIKO-Markengläser"],
+    image: {
+      src: "/images/schorcht/IMG_9201.jpg",
+      width: 800,
+      height: 600,
+      alt: "Drei Holzbrillen von Leja auf dunklem Holz",
+    },
+    cta: "Brillenberatung vereinbaren",
   },
   {
     id: "rundblick",
-    icon: "CircleDot",
-    title: "Rundblick – Kontaktlinsen",
-    shortDescription: "Kontakt mit dem fast Unsichtbaren",
-    description:
-      "Kontaktlinsen individuell. Weich. Formstabil. Multifokal. Hornhaut-Topographie, mikrogenau, sekundenschnell. Auf Wunsch im zinslosen Abo.",
-    benefits: [
-      "Individuelle Anpassung",
-      "Hornhaut-Topographie",
-      "Pflegemittel-Abo möglich",
+    name: "Rundblick",
+    topic: "Kontaktlinsen",
+    lead: "Kontakt mit dem fast Unsichtbaren.",
+    text: [
+      "Für jeden Tag oder nur zum Sport: weiche, formstabile und multifokale Kontaktlinsen. Die Hornhaut vermessen wir per Topographie – mikrogenau und in Sekunden.",
+      "Nach der Anpassung bleiben wir dran: mit Kontrollterminen und den passenden Pflegemitteln, auf Wunsch bequem im Abo.",
     ],
-    href: "/leistungen#rundblick",
+    points: ["Weich, formstabil, multifokal", "Hornhaut-Topographie", "Kontrollen & Pflegemittel-Abo"],
+    image: {
+      src: "/images/schorcht/71578755.jpg",
+      width: 800,
+      height: 600,
+      alt: "Eine Kontaktlinse auf einer Fingerspitze",
+    },
+    cta: "Kontaktlinsen anpassen lassen",
   },
   {
     id: "weitblick",
-    icon: "Gem",
-    title: "Weitblick – Service und Sicherheit",
-    shortDescription: "Wir sind für Sie da",
-    description:
-      "Perfekter Sehkomfort – unser Ziel. Ihre Zufriedenheit – unser Anspruch. Markengläser von SEIKO mit 12 Monaten Verträglichkeitsgarantie.",
-    benefits: [
-      "SEIKO Markengläser",
-      "12 Monate Verträglichkeitsgarantie",
-      "Auswahl nach Hause",
+    name: "Weitblick",
+    topic: "Service & Werkstatt",
+    lead: "Wir sind für Sie da. Auch danach.",
+    text: [
+      "Lockere Schraube, Druckstelle, schiefer Bügel? Kommen Sie vorbei, wir richten es.",
+      "Sie möchten in Ruhe entscheiden? Nehmen Sie eine Auswahl mit nach Hause. Und wenn der Weg in die Stadt schwerfällt, kommen wir bei Bedarf auch zu Ihnen.",
     ],
-    href: "/leistungen#weitblick",
+    points: ["Werkstatt & Anpassung", "Auswahl zur Ansicht mit nach Hause", "Hausbesuch bei Bedarf"],
+    image: {
+      src: "/images/schorcht/start04.jpg",
+      width: 800,
+      height: 600,
+      alt: "Empfangstheke aus Kirschholz und Beratungsplätze im Geschäft",
+    },
+    cta: "Vorbeikommen oder anrufen",
+  },
+];
+
+// Kurze Zusagen unter den Leistungen.
+// PLATZHALTER: Dauer der Garantie (alte Seite nennt 12 und 24 Monate) und
+// Konditionen des Brillenabos bitte bestätigen.
+export const promises = [
+  {
+    title: "Verträglichkeitsgarantie",
+    text: "Sie kommen mit Ihren neuen Gläsern nicht zurecht? Dann bessern wir nach. Das gilt für SEIKO-Markengläser.",
+  },
+  {
+    title: "Brillenabo",
+    text: "Ihre neue Brille zinslos in Monatsraten bezahlen. Die Konditionen erkläre ich Ihnen gern im Laden.",
+  },
+  {
+    title: "Nachjustieren",
+    text: "Drückt etwas oder rutscht die Brille? Wir passen sie nach, so oft es nötig ist.",
+  },
+] as const;
+
+export const frames = [
+  { src: "/images/schorcht/IMG_9002.jpg", alt: "Helle Holzbrille vor einem Fächer aus verschiedenen Holzarten", caption: "Holz. Jede Fassung ein Einzelstück." },
+  { src: "/images/schorcht/marin_compo_03_600x800.jpg", alt: "Mehrere farbige Acetatfassungen in Gelb, Havanna und Blau", caption: "Acetat. Farbe darf sein." },
+  { src: "/images/schorcht/laredo_compos_02_600x800.jpg", alt: "Feine Metallfassungen mit Havanna-Akzenten", caption: "Metall. Fein und zeitlos." },
+] as const;
+
+// -----------------------------------------------------------------------------
+// Geschichte
+// -----------------------------------------------------------------------------
+
+export const history = [
+  {
+    year: "1936",
+    title: "Wallstraße 8",
+    text: "Am 1. April eröffnet Bernhard Schorcht sein Fachgeschäft für Augenoptik.",
+  },
+  {
+    year: "1945",
+    title: "Dresden zerstört",
+    text: "Mit der Altstadt wird auch das Geschäft in der Wallstraße zerstört.",
+    image: {
+      src: "/images/schorcht/Postplatz-Sophienkirche-Wilsdruffer-Strasse.jpg",
+      alt: "Historische Aufnahme vom Postplatz mit der zerstörten Sophienkirche",
+      caption: "Postplatz mit Sophienkirche, Nachkriegszeit",
+    },
+  },
+  {
+    year: "1946",
+    title: "Neuanfang in der Stiftstraße",
+    text: "Mit einer Bergungsgenehmigung der Stadt Dresden wird geborgen, was noch zu retten ist. Es geht weiter.",
+    image: {
+      src: "/images/schorcht/Bergungsgenehmigung-1946.jpg",
+      alt: "Die maschinengeschriebene Bergungsgenehmigung der Stadt Dresden von 1946",
+      caption: "Bergungsgenehmigung, 1946",
+    },
+  },
+  {
+    year: "danach",
+    title: "Freiberger und Schweriner Straße",
+    text: "Johannes Schorcht führt das Geschäft weiter, zuerst in der Freiberger Straße, dann in der Schweriner Straße 46.",
+    image: {
+      src: "/images/schorcht/Freiberger-Strasse.jpg",
+      alt: "Schaufenster mit dem Schriftzug Optiker Schorcht in der Freiberger Straße",
+      caption: "Freiberger Straße",
+    },
+  },
+  {
+    year: "1989",
+    title: "Joachim Skorupa übernimmt",
+    text: "Der Name bleibt. Die Freude am Handwerk auch.",
+    image: {
+      src: "/images/schorcht/AO-Schorcht-Schweriner-Strasse-46.jpg",
+      alt: "Historische Straßenansicht mit dem Geschäft Augenoptiker Schorcht in der Schweriner Straße",
+      caption: "Schweriner Straße 46",
+    },
+  },
+  {
+    year: "2002",
+    title: "Das Hochwasser",
+    text: "Das Hochwasser trifft auch uns. Eine Zeit lang arbeiten wir im Ausweichgeschäft.",
+  },
+  {
+    year: "2003",
+    title: "Kleine Brüdergasse 1",
+    text: "Im Lebendigen Haus finden wir unser neues Zuhause – mitten in der Altstadt. Hier sind wir bis heute.",
   },
 ] as const;
 
 // -----------------------------------------------------------------------------
-// Steps (How it works)
+// Terminanfrage
 // -----------------------------------------------------------------------------
 
-export const steps = [
-  {
-    number: "01",
-    title: "Kennenlernen",
-    description:
-      "Fühlen Sie sich wohl. Seien Sie unser Gast. Selters. Saft. Kaffee. Espresso. Wir nehmen uns Zeit für Ihre Wünsche.",
-  },
-  {
-    number: "02",
-    title: "Messung & Beratung",
-    description:
-      "Sehanalyse mit Visionix 120. Sehgewohnheiten und Bedürfnisse analysieren. Ich berate, Sie entscheiden.",
-  },
-  {
-    number: "03",
-    title: "Perfekte Anpassung",
-    description:
-      "Ihre neue Brille wird perfekt justiert. Bei Problemen: kostenlose Nachbesserung. Wir sind für Sie da.",
-  },
+export const appointmentTopics = [
+  "Sehtest",
+  "Neue Brille",
+  "Kontaktlinsen",
+  "Reparatur / Anpassung",
+  "Etwas anderes",
 ] as const;
 
 // -----------------------------------------------------------------------------
-// Testimonials
+// Rechtliches (Impressum)
 // -----------------------------------------------------------------------------
 
-export const testimonials = [
-  {
-    quote:
-      "Kompetente und persönliche Beratung. Herr Skorupa nimmt sich wirklich Zeit für jeden Kunden.",
-    author: "Kundin aus Dresden-Altstadt",
-    role: "Gleitsichtbrille",
-  },
-  {
-    quote:
-      "Endlich jemand, der meine Kontaktlinsen richtig anpasst. Die Hornhaut-Messung war beeindruckend präzise.",
-    author: "Stammkunde",
-    role: "Kontaktlinsen",
-  },
-  {
-    quote:
-      "Kleine Brüdergasse ist immer einen Besuch wert. Persönlich, professionell und menschlich.",
-    author: "Kunde aus Blasewitz",
-    role: "Neue Brille",
-  },
-  {
-    quote:
-      "Das BRILLENABO macht es einfach, sich eine hochwertige Brille zu leisten. Toller Service!",
-    author: "Kundin",
-    role: "Ratenzahlung",
-  },
-] as const;
-
-// -----------------------------------------------------------------------------
-// Lookbook / Frames
-// -----------------------------------------------------------------------------
-
-export const lookbook = {
-  headline: "Ihr Gesicht. Meine Inspiration.",
-  subline:
-    "Markant. Sportlich. Elegant. Ich habe, was Sie suchen.",
-  items: [
-    { image: "/images/lookbook-1.jpg", alt: "Elegante Acetat-Fassung" },
-    { image: "/images/lookbook-2.jpg", alt: "Klassische Metallfassung" },
-  ],
-} as const;
-
-// -----------------------------------------------------------------------------
-// Location CTA
-// -----------------------------------------------------------------------------
-
-export const locationCta = {
-  headline: "Besuchen Sie uns in Dresden",
-  subline:
-    "Im lebendigen Haus, Kleine Brüdergasse 1. Wir freuen uns auf Sie.",
-} as const;
-
-// -----------------------------------------------------------------------------
-// Final CTA
-// -----------------------------------------------------------------------------
-
-export const finalCta = {
-  headline: "Termin vereinbaren",
-  subline:
-    "Vereinbaren Sie Ihren persönlichen Beratungstermin. Wir nehmen uns Zeit für Sie.",
-  buttonLabel: "Jetzt Termin anfragen",
-  buttonHref: contact.bookingUrl,
-} as const;
-
-// -----------------------------------------------------------------------------
-// Appointment Form Options
-// -----------------------------------------------------------------------------
-
-export const appointmentOptions = {
-  days: [
-    { value: "mo", label: "Mo" },
-    { value: "di", label: "Di" },
-    { value: "do", label: "Do" },
-    { value: "fr", label: "Fr" },
-    { value: "sa", label: "Sa" },
-  ],
-  timeSlots: [
-    { value: "vormittag", label: "Vormittag" },
-    { value: "nachmittag", label: "Nachmittag" },
-    { value: "egal", label: "Egal" },
-  ],
-  concerns: [
-    { value: "sehtest", label: "Sehtest / Refraktion" },
-    { value: "brille", label: "Neue Brille" },
-    { value: "kontaktlinsen", label: "Kontaktlinsen" },
-    { value: "reparatur", label: "Reparatur / Anpassung" },
-    { value: "beratung", label: "Allgemeine Beratung" },
-  ],
-} as const;
-
-// -----------------------------------------------------------------------------
-// SEO Metadata per Page
-// -----------------------------------------------------------------------------
-
-export const pageMeta = {
-  home: {
-    title: "OPTIK SCHORCHT Dresden – Sehen erleben",
-    description:
-      "Ihr Optiker in Dresden. Tradition trifft Innovation. Persönliche Beratung, 3D-Refraktion, Kontaktlinsen und Werkstattservice.",
-  },
-  leistungen: {
-    title: "Leistungen – OPTIK SCHORCHT Dresden",
-    description:
-      "Durchblick (Sehanalyse), Anblick (Stilberatung), Rundblick (Kontaktlinsen), Weitblick (Service). Erfahren Sie mehr.",
-  },
-  brillen: {
-    title: "Brillen & Stilberatung – OPTIK SCHORCHT Dresden",
-    description:
-      "Ihr Gesicht. Meine Inspiration. Markante, sportliche und elegante Brillen. Individuelle Beratung von Joachim Skorupa.",
-  },
-  termin: {
-    title: "Termin vereinbaren – OPTIK SCHORCHT Dresden",
-    description:
-      "Vereinbaren Sie Ihren persönlichen Beratungstermin bei OPTIK SCHORCHT in Dresden. Wir nehmen uns Zeit.",
-  },
-  kontakt: {
-    title: "Kontakt & Anfahrt – OPTIK SCHORCHT Dresden",
-    description:
-      "Kleine Brüdergasse 1, 01067 Dresden (das lebendige Haus). Öffnungszeiten und Anfahrt zu OPTIK SCHORCHT.",
-  },
-  impressum: {
-    title: "Impressum – OPTIK SCHORCHT Dresden",
-    description: "Impressum und rechtliche Angaben zu OPTIK SCHORCHT Dresden. Inhaber: Joachim Skorupa.",
-  },
-  datenschutz: {
-    title: "Datenschutz – OPTIK SCHORCHT Dresden",
-    description:
-      "Datenschutzerklärung von OPTIK SCHORCHT Dresden. Informationen zur Verarbeitung personenbezogener Daten.",
-  },
+export const legal = {
+  vatId: "DE 140 192 670",
+  chamber: "Handwerkskammer Dresden",
+  chamberAddress: "Am Lagerplatz 8, 01099 Dresden",
+  chamberUrl: "https://www.hwk-dresden.de/",
+  regulation: "Gesetz zur Ordnung des Handwerks (Handwerksordnung)",
+  regulationUrl: "https://www.gesetze-im-internet.de/hwo/",
+  // PLATZHALTER: Name und Anschrift des Hosting-Anbieters (für die Datenschutzerklärung)
+  host: "PLATZHALTER: Hosting-Anbieter mit Anschrift",
 } as const;

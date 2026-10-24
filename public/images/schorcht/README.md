@@ -1,9 +1,14 @@
 # Originalbilder von Optik Schorcht
 
-Diese Bilder wurden für die Überarbeitung von der bestehenden Website übernommen. Die aktive Website verwendet hieraus Ladenansichten, Produktbilder, Messtechnik, das Gebäude und historische Aufnahmen. Neu erzeugte Personenmotive aus dem vorigen Entwurf werden nicht verwendet.
+Übernommen von der bisherigen Website https://optik-schorcht.de/. Dateinamen und Bildinhalte sind unverändert.
 
-Quelle: https://optik-schorcht.de/
-Bildverzeichnis: https://optik-schorcht.de/wp-content/uploads/2026/08/
-Dateinamen und Bildinhalte wurden unverändert übernommen. `logo.png` stammt aus `/wp-content/themes/optik-schorcht/assets/img/` und liegt als Referenz im Archiv. Das Punktmotiv und der gestapelte Schriftzug werden für eine scharfe Darstellung direkt in der Oberfläche aufgebaut.
+- Laden: `start04.jpg`
+- Brillen: `IMG_9002.jpg`, `IMG_9201.jpg` (Leja-Holzbrillen), `marin_compo_03_600x800.jpg`, `laredo_compos_02_600x800.jpg`
+- Kontaktlinsen: `71578755.jpg`
+- Messtechnik: `visionix.png` (Visionix 120)
+- Geschichte: `Postplatz-Sophienkirche-Wilsdruffer-Strasse.jpg`, `Bergungsgenehmigung-1946.jpg`, `Freiberger-Strasse.jpg`, `AO-Schorcht-Schweriner-Strasse-46.jpg`
+- `logo.png`: Original-Logo als Vorlage. Auf der Website wird es als SVG nachgebaut (`src/components/Logo.tsx`), damit es auf jedem Bildschirm scharf ist.
 
-Die Bildauswahl folgt den ursprünglichen Seiten Überblick, Weitblick, Einblick, Anblick, Rundblick, Durchblick und Rückblick. Historische Aufnahmen erscheinen auf Rückblick; Brillenbilder auf Anblick. Die Vergrößerungsansicht zeigt die vorhandenen Originalauflösungen.
+Die Originale sind nur 800 × 600 Pixel groß und werden deshalb nie größer als nötig gezeigt.
+
+Stockfotos mit Models (Rodenstock-Kampagne, Sonnenbrillen-Werbung) und Bilder mit fremden Wasserzeichen werden bewusst nicht verwendet.

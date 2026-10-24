@@ -1,27 +1,101 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import { ArrowUpRight } from "lucide-react";
-import { contact } from "@/content/site";
+import { appointmentTopics, contact } from "@/content/site";
 
-const topics = ["Brillenberatung", "Sehanalyse", "Kontaktlinsen", "Service & Anpassung"];
-
+// Die Anfrage wird nicht über einen Server verschickt: Das Formular öffnet
+// eine fertig formulierte E-Mail im Mailprogramm des Besuchers.
+// Dadurch werden keine Daten auf der Website gespeichert, und es gibt
+// keinen Formular-Endpunkt, den Spam-Bots missbrauchen könnten.
 export function AppointmentForm() {
   const [prepared, setPrepared] = useState(false);
-  function prepareEmail(event: FormEvent<HTMLFormElement>) {
+
+  function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const topic = String(data.get("topic"));
-    const body = `Guten Tag Herr Skorupa,\n\nich wünsche einen Termin für ${topic}.\n\nMein Name: ${data.get("name")}\nMein Wunschtermin: ${data.get("date") || "nach Absprache"}\n\n${data.get("message") || ""}\n\nIch freue mich über Ihre Rückmeldung.\nFreundliche Grüße\n${data.get("name")}`;
+    const name = String(data.get("name") ?? "").trim();
+    const topic = String(data.get("topic") ?? "");
+    const when = String(data.get("when") ?? "").trim();
+    const callback = String(data.get("phone") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+    const body = [
+      "Guten Tag Herr Skorupa,",
+      "",
+      `ich hätte gern einen Termin: ${topic}.`,
+      `Wann es mir passt: ${when || "nach Absprache"}`,
+      callback ? `Sie erreichen mich unter: ${callback}` : "",
+      message ? `\n${message}` : "",
+      "",
+      "Viele Grüße",
+      name,
+    ]
+      .filter((line, i, all) => line !== "" || all[i - 1] !== "")
+      .join("\n");
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(`Terminanfrage: ${topic}`)}&body=${encodeURIComponent(body)}`;
     setPrepared(true);
   }
-  return <form onSubmit={prepareEmail} className="booking-form">
-    <fieldset><legend>Wofür dürfen wir uns Zeit nehmen?</legend><div className="booking-options">{topics.map((topic, i) => <label className="booking-option" key={topic}><input type="radio" name="topic" value={topic} defaultChecked={i === 0} required /><span>{topic}</span></label>)}</div></fieldset>
-    <div className="booking-fields"><div><label htmlFor="appointment-name">Ihr Name *</label><input id="appointment-name" type="text" name="name" autoComplete="name" placeholder="Vor- und Nachname" required minLength={2} maxLength={100} /></div><div><label htmlFor="appointment-date">Ihr Wunschtermin</label><input id="appointment-date" type="text" name="date" placeholder="Zum Beispiel: Freitag vormittags" maxLength={150} /></div></div>
-    <div className="booking-message"><label htmlFor="appointment-message">Was möchten Sie uns noch sagen?</label><textarea id="appointment-message" name="message" placeholder="Ihre Wünsche und Fragen …" rows={4} maxLength={2000} /></div>
-    <p className="booking-note">Wir bereiten Ihre Anfrage in Ihrem E-Mail-Programm vor. Sie können sie dort prüfen und selbst senden. Ihr Termin steht fest, sobald wir ihn persönlich bestätigt haben.</p>
-    <button type="submit" className="solid-link">E-Mail-Anfrage vorbereiten <ArrowUpRight size={18} /></button>
-    {prepared && <p role="status" className="booking-feedback">Ihre Anfrage ist vorbereitet. Bitte senden Sie die E-Mail in Ihrem E-Mail-Programm. Falls es sich nicht öffnet, erreichen Sie uns unter <a className="underline" href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a> oder <a className="underline" href={`mailto:${contact.email}`}>{contact.email}</a>.</p>}
-  </form>;
+
+  return (
+    <form className="appointment-form" onSubmit={submit}>
+      <fieldset>
+        <legend>Worum geht es?</legend>
+        <div className="topic-list">
+          {appointmentTopics.map((topic, i) => (
+            <label key={topic} className="topic">
+              <input type="radio" name="topic" value={topic} defaultChecked={i === 0} />
+              <span>{topic}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <div className="field-row">
+        <div className="field">
+          <label htmlFor="f-name">Ihr Name</label>
+          <input id="f-name" name="name" type="text" autoComplete="name" required minLength={2} maxLength={100} />
+        </div>
+        <div className="field">
+          <label htmlFor="f-phone">
+            Telefon für Rückfragen <span className="optional">(freiwillig)</span>
+          </label>
+          <input id="f-phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" maxLength={40} />
+        </div>
+      </div>
+
+      <div className="field">
+        <label htmlFor="f-when">
+          Wann passt es Ihnen? <span className="optional">(freiwillig)</span>
+        </label>
+        <input id="f-when" name="when" type="text" maxLength={150} placeholder="z. B. Dienstag oder Donnerstag, eher vormittags" />
+      </div>
+
+      <div className="field">
+        <label htmlFor="f-message">
+          Möchten Sie noch etwas dazu sagen? <span className="optional">(freiwillig)</span>
+        </label>
+        <textarea id="f-message" name="message" rows={3} maxLength={1500} />
+      </div>
+
+      <p className="form-note">
+        Beim Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Anfrage. Sie schicken sie selbst ab, auf
+        dieser Website wird nichts gespeichert. Ihr Termin steht, sobald wir ihn bestätigt haben. Mehr dazu in der{" "}
+        <Link href="/datenschutz">Datenschutzerklärung</Link>.
+      </p>
+
+      <button type="submit" className="button">
+        Anfrage als E-Mail öffnen
+      </button>
+
+      <p className="form-feedback" role="status">
+        {prepared && (
+          <>
+            Ihr E-Mail-Programm sollte sich jetzt geöffnet haben. Falls nicht, rufen Sie uns einfach an:{" "}
+            <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a> oder schreiben Sie an{" "}
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+          </>
+        )}
+      </p>
+    </form>
+  );
 }

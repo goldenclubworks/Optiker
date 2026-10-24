@@ -1,8 +1,0 @@
-# Schorcht editorial assets
-
-- `schorcht-campaign.png`: fictional campaign model, created with the built-in ImageGen tool for this redesign. The portrait is a design asset, not an image of an employee or customer, and does not represent a specific stocked frame.
-- `schorcht-original-store.jpg`: actual store photograph from https://optik-schorcht.de/wp-content/uploads/2026/08/start03.jpg
-
-## ImageGen prompt
-
-Use case: photorealistic-natural. Asset type: luxury independent eyewear website campaign hero, vertical portrait aspect ratio 4:5. Create an exceptionally stylish high fashion editorial photograph: close portrait of a sophisticated woman aged around 35 with short dark slicked-back hair, hazel eyes and natural freckles, wearing bold thick dark espresso translucent acetate optical glasses with clear lenses, understated black tailored high-collar top. Effortless confidence, candid direct gaze, slightly turned head, hand resting near cheek but not covering the glasses. Crop from top of head to upper torso, subject large in frame, slightly right of centre. Quiet sculptural beige limestone studio wall behind, late-afternoon hard sunlight coming from left with a dramatic diagonal shadow across the background, soft light on the face, tactile skin texture, subtle film grain, photographed with an 85mm lens for an independent European eyewear journal. Restrained palette of warm sand, espresso, black, creamy skin tones. Serious premium editorial art direction, no smiles, no commercial stock photo style, no shiny luxury cliches, no props, no visible jewelry. Glasses must have convincing symmetry and immaculate optical details. Absolutely no text, logos, typography or watermark. This is a fictional campaign model, not a real employee or customer.

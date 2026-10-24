@@ -1,175 +1,95 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/site/Header";
-import { Footer } from "@/components/site/Footer";
-import { siteConfig, contact, pageMeta } from "@/content/site";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { contact, legal, site } from "@/content/site";
 
 export const metadata: Metadata = {
-    title: pageMeta.datenschutz.title,
-    description: pageMeta.datenschutz.description,
+  title: "Datenschutz",
+  description: "Datenschutzerklärung von Optik Schorcht Dresden: keine Cookies, kein Tracking, Terminanfrage per E-Mail.",
+  alternates: { canonical: "/datenschutz" },
 };
 
 export default function DatenschutzPage() {
-    return (
-        <>
-            <Header />
-            <main id="main-content" className="section-padding">
-                <div className="container-premium">
-                    <div className="mx-auto max-w-3xl">
-                        <h1 className="text-4xl font-bold tracking-tight">
-                            Datenschutzerklärung
-                        </h1>
+  return (
+    <>
+      <Header />
+      <main id="inhalt" className="legal">
+        <div className="shell">
+          <h1>Datenschutz</h1>
 
-                        <div className="mt-12 space-y-8 text-muted-foreground">
-                            <section>
-                                <h2 className="mb-4 text-xl font-semibold text-foreground">
-                                    1. Datenschutz auf einen Blick
-                                </h2>
-                                <h3 className="mb-2 font-medium text-foreground">
-                                    Allgemeine Hinweise
-                                </h3>
-                                <p>
-                                    Die folgenden Hinweise geben einen einfachen Überblick
-                                    darüber, was mit Ihren personenbezogenen Daten passiert, wenn
-                                    Sie diese Website besuchen. Personenbezogene Daten sind alle
-                                    Daten, mit denen Sie persönlich identifiziert werden können.
-                                </p>
-                            </section>
+          <p>
+            Kurz gesagt: Diese Website setzt keine Cookies, verwendet keine Analyse- oder Werbedienste und lädt keine
+            Inhalte von fremden Servern. Schriften und Bilder werden direkt von unserer Domain ausgeliefert.
+          </p>
 
-                            <section>
-                                <h2 className="mb-4 text-xl font-semibold text-foreground">
-                                    2. Verantwortliche Stelle
-                                </h2>
-                                <p>
-                                    Die verantwortliche Stelle für die Datenverarbeitung auf
-                                    dieser Website ist:
-                                </p>
-                                <address className="mt-4 not-italic">
-                                    <p className="font-medium text-foreground">
-                                        {siteConfig.name}
-                                    </p>
-                                    <p>{contact.address.street}</p>
-                                    <p>
-                                        {contact.address.zip} {contact.address.city}
-                                    </p>
-                                    <p className="mt-2">Telefon: {contact.phoneDisplay}</p>
-                                    <p>E-Mail: {contact.email}</p>
-                                </address>
-                            </section>
+          <h2>1. Verantwortlicher</h2>
+          <address>
+            <p>
+              Optik Schorcht, Inhaber {site.owner}
+              <br />
+              {contact.street}, {contact.zip} {contact.city}
+              <br />
+              Telefon: <a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a>
+              <br />
+              E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </p>
+          </address>
 
-                            <section>
-                                <h2 className="mb-4 text-xl font-semibold text-foreground">
-                                    3. Datenerfassung auf dieser Website
-                                </h2>
+          <h2>2. Aufruf der Website und Hosting</h2>
+          <p>
+            Die Website wird betrieben bei: <span className="placeholder">{legal.host}</span>. Beim Aufruf verarbeitet
+            der Server technisch notwendige Daten, die Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit, die
+            aufgerufene Seite, Referrer-URL sowie Browser- und Betriebssystemangaben. Das ist nötig, um die Seite
+            auszuliefern und ihre Sicherheit zu gewährleisten (Art. 6 Abs. 1 lit. f DSGVO). Die Protokolle werden
+            vom Hosting-Anbieter nach kurzer Zeit gelöscht und nicht mit anderen Daten zusammengeführt. Mit dem
+            Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.
+          </p>
 
-                                <h3 className="mb-2 mt-6 font-medium text-foreground">
-                                    Kontaktformular
-                                </h3>
-                                <p>
-                                    Wenn Sie uns per Kontaktformular Anfragen zukommen lassen,
-                                    werden Ihre Angaben aus dem Anfrageformular inklusive der von
-                                    Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der
-                                    Anfrage und für den Fall von Anschlussfragen bei uns
-                                    gespeichert. Diese Daten geben wir nicht ohne Ihre
-                                    Einwilligung weiter.
-                                </p>
+          <h2>3. Cookies und Tracking</h2>
+          <p>
+            Wir setzen keine Cookies und verwenden keine Analyse-, Tracking- oder Social-Media-Dienste. Deshalb gibt es
+            auch keinen Cookie-Banner.
+          </p>
 
-                                <h3 className="mb-2 mt-6 font-medium text-foreground">
-                                    Terminanfragen
-                                </h3>
-                                <p>
-                                    Wenn Sie über unser Terminformular eine Anfrage stellen,
-                                    werden die von Ihnen angegebenen Daten (Name, Telefonnummer,
-                                    E-Mail, Terminwunsch, Anliegen) zur Bearbeitung Ihrer
-                                    Terminanfrage verwendet und für den Zeitraum der
-                                    Terminvereinbarung gespeichert.
-                                </p>
+          <h2>4. Terminanfrage und Kontakt</h2>
+          <p>
+            Das Terminformular auf dieser Website verschickt selbst keine Daten. Es öffnet lediglich Ihr eigenes
+            E-Mail-Programm mit einer vorformulierten Nachricht, die Sie prüfen und selbst absenden. Erst dann erhalten
+            wir Ihre Angaben – genauso, als hätten Sie uns direkt geschrieben.
+          </p>
+          <p>
+            Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir Ihre Angaben (z. B. Name,
+            Telefonnummer, Terminwunsch), um Ihre Anfrage zu beantworten und den Termin zu vereinbaren (Art. 6 Abs. 1
+            lit. b DSGVO). Wir löschen die Angaben, wenn sie dafür nicht mehr gebraucht werden und keine gesetzlichen
+            Aufbewahrungspflichten bestehen. Bitte schicken Sie uns per E-Mail keine Gesundheitsdaten, die über den
+            Terminwunsch hinausgehen – das besprechen wir lieber persönlich.
+          </p>
 
-                                <h3 className="mb-2 mt-6 font-medium text-foreground">
-                                    Server-Log-Dateien
-                                </h3>
-                                <p>
-                                    Der Provider der Seiten erhebt und speichert automatisch
-                                    Informationen in so genannten Server-Log-Dateien, die Ihr
-                                    Browser automatisch an uns übermittelt. Dies sind:
-                                </p>
-                                <ul className="mt-2 list-inside list-disc space-y-1">
-                                    <li>Browsertyp und Browserversion</li>
-                                    <li>Verwendetes Betriebssystem</li>
-                                    <li>Referrer URL</li>
-                                    <li>Hostname des zugreifenden Rechners</li>
-                                    <li>Uhrzeit der Serveranfrage</li>
-                                    <li>IP-Adresse</li>
-                                </ul>
-                            </section>
+          <h2>5. Links zu anderen Websites</h2>
+          <p>
+            Der Link „Route planen“ führt zu Google Maps. Erst wenn Sie ihn anklicken, verlassen Sie unsere Website;
+            dann gelten die Datenschutzbestimmungen von Google.
+          </p>
 
-                            <section>
-                                <h2 className="mb-4 text-xl font-semibold text-foreground">
-                                    4. Ihre Rechte
-                                </h2>
-                                <p>Sie haben jederzeit das Recht:</p>
-                                <ul className="mt-2 list-inside list-disc space-y-1">
-                                    <li>
-                                        Auskunft über Ihre bei uns gespeicherten Daten zu erhalten
-                                    </li>
-                                    <li>
-                                        Die Berichtigung unrichtiger personenbezogener Daten zu
-                                        verlangen
-                                    </li>
-                                    <li>Die Löschung Ihrer bei uns gespeicherten Daten zu verlangen</li>
-                                    <li>
-                                        Die Einschränkung der Datenverarbeitung zu verlangen
-                                    </li>
-                                    <li>Der Datenverarbeitung zu widersprechen</li>
-                                    <li>Datenübertragbarkeit zu verlangen</li>
-                                </ul>
-                            </section>
+          <h2>6. Ihre Rechte</h2>
+          <p>Sie haben das Recht auf</p>
+          <ul>
+            <li>Auskunft über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO),</li>
+            <li>Berichtigung (Art. 16 DSGVO) und Löschung (Art. 17 DSGVO),</li>
+            <li>Einschränkung der Verarbeitung (Art. 18 DSGVO),</li>
+            <li>Datenübertragbarkeit (Art. 20 DSGVO),</li>
+            <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO).</li>
+          </ul>
+          <p>
+            Eine kurze Nachricht an uns genügt. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde
+            beschweren, zum Beispiel bei der Sächsischen Datenschutz- und Transparenzbeauftragten, Devrientstraße 5,
+            01067 Dresden.
+          </p>
 
-                            <section>
-                                <h2 className="mb-4 text-xl font-semibold text-foreground">
-                                    5. Cookies
-                                </h2>
-                                <p>
-                                    Diese Website verwendet keine Tracking-Cookies. Es werden
-                                    ausschließlich technisch notwendige Cookies verwendet, die für
-                                    den Betrieb der Website erforderlich sind.
-                                </p>
-                            </section>
-
-                            <section>
-                                <h2 className="mb-4 text-xl font-semibold text-foreground">
-                                    6. Externe Links
-                                </h2>
-                                <p>
-                                    Diese Website enthält Links zu externen Websites (z.B. Google
-                                    Maps). Wenn Sie diesen Links folgen, gelten die
-                                    Datenschutzbestimmungen der jeweiligen Anbieter.
-                                </p>
-                            </section>
-
-                            <section>
-                                <h2 className="mb-4 text-xl font-semibold text-foreground">
-                                    7. Änderungen
-                                </h2>
-                                <p>
-                                    Wir behalten uns vor, diese Datenschutzerklärung anzupassen,
-                                    damit sie stets den aktuellen rechtlichen Anforderungen
-                                    entspricht oder um Änderungen unserer Leistungen in der
-                                    Datenschutzerklärung umzusetzen.
-                                </p>
-                            </section>
-
-                            <section className="border-t border-border pt-8">
-                                <p className="text-sm">
-                                    <strong>Hinweis:</strong> Diese Datenschutzerklärung dient als
-                                    Platzhalter und ersetzt keine rechtliche Beratung. Bitte
-                                    lassen Sie diese von einem Rechtsanwalt prüfen.
-                                </p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <Footer />
-        </>
-    );
+          <p>Stand: Oktober 2026</p>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
 }

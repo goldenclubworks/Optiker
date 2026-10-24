@@ -1,494 +1,272 @@
 import Image from "next/image";
-import { ArrowUpRight, Plus } from "lucide-react";
-import { Header } from "@/components/site/Header";
-import { Footer } from "@/components/site/Footer";
-import { CinematicHero } from "@/components/hero/CinematicHero";
-import { ImageGallery } from "@/components/ImageGallery";
-import { FrameCollection } from "@/components/FrameCollection";
-import { EditorialMotion } from "@/components/EditorialMotion";
 import { AppointmentForm } from "@/components/AppointmentForm";
-import { storeImages, blickPages } from "@/content/blick";
-import { contact } from "@/content/site";
-
-function Chapter({
-  number,
-  name,
-  detail,
-}: {
-  number: string;
-  name: string;
-  detail?: string;
-}) {
-  return (
-    <div className="chapter-label">
-      <span>
-        <span>{number}</span> / {name}
-      </span>
-      {detail && <span>{detail}</span>}
-    </div>
-  );
-}
-const services = [
-  {
-    title: "Wir richten es.",
-    subtitle: "Werkstatt & Anpassung",
-    text: "Lockere Schrauben oder unangenehme Druckstellen? Kommen Sie vorbei. Wir kümmern uns um Ihre Brille – von der ersten Anpassung bis zum Service im Alltag.",
-  },
-  {
-    title: "In Ruhe entscheiden.",
-    subtitle: "Beratung mit Zeit",
-    text: "Fühlen Sie sich wohl. Seien Sie unser Gast. Bei einem Kaffee oder Espresso nehmen wir uns Zeit für Ihre Wünsche. Eine Auswahl mit nach Hause nehmen oder ein Hausbesuch bei Bedarf? Sprechen Sie uns an.",
-  },
-  {
-    title: "Gut sehen. Gut fühlen.",
-    subtitle: "Gläser & Verträglichkeit",
-    text: "Gute Gläser müssen zu Ihrem Leben passen. Zu SEIKO-Markengläsern, Verträglichkeitsgarantie und den passenden Möglichkeiten beraten wir Sie persönlich.",
-  },
-  {
-    title: "Eine gute Möglichkeit.",
-    subtitle: "Das Brillenabo",
-    text: "Eine neue Brille mit einem passenden Zahlungsmodell: Die Möglichkeiten und Konditionen besprechen wir in Ruhe. Die Informationen können Sie vorab als PDF lesen.",
-    link: true,
-  },
-];
+import { Footer, MobileBar } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Dots } from "@/components/Logo";
+import { OpenNow } from "@/components/OpenNow";
+import { Sehtafel } from "@/components/Sehtafel";
+import { contact, frames, hero, history, hoursShort, letter, openingHours, promises, services, site } from "@/content/site";
 
 export default function HomePage() {
   return (
     <>
       <Header />
-      <main id="main-content">
-        <CinematicHero />
-        <section
-          id="einblick"
-          className="intro-section paper-section"
-          aria-labelledby="intro-heading"
-        >
-          <div className="site-shell">
-            <Chapter
-              number="01"
-              name="Einblick"
-              detail="Persönlich. Seit 1936."
-            />
-            <div className="intro-composition">
-              <h2 id="intro-heading" className="statement" data-reveal>
-                Eine Brille,
+      <main id="inhalt">
+        {/* ---------------------------------------------------------------- */}
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="shell hero-grid">
+            <div className="hero-text">
+              <p className="kicker">{hero.kicker}</p>
+              <h1 id="hero-title">
+                Sehen
                 <br />
-                die zu <em>Ihnen</em>
-                <br />
-                gehört.
-              </h2>
-              <div className="intro-personal">
-                <span className="optical-mark" aria-hidden="true">
-                  {Array.from({ length: 25 }, (_, i) => (
-                    <i
-                      key={i}
-                      style={{
-                        transform: `scale(${Math.max(0.2, 1 - (Math.abs((i % 5) - 2) + Math.abs(Math.floor(i / 5) - 2)) * 0.18)})`,
-                      }}
-                    />
-                  ))}
-                </span>
-                <span className="small-heading">
-                  Tradition trifft Innovation.
-                  <br />
-                  Und auf Sie.
-                </span>
-                <p>
-                  Sehen und Aussehen. Beides habe ich für Sie im Blick. Mit
-                  Freude am Handwerk, einem offenen Ohr und Zeit für das, was
-                  Ihnen wichtig ist.
-                </p>
-                <span className="owner-name">Joachim Skorupa</span>
-                <small>Augenoptikermeister & Inhaber</small>
-                <a href="#termin" className="text-link">
-                  Lernen wir uns kennen <ArrowUpRight size={18} />
+                <em>erleben.</em>
+              </h1>
+              <p className="hero-intro">{hero.intro}</p>
+              <div className="hero-actions">
+                <a className="button" href="#termin">
+                  Termin anfragen
+                </a>
+                <a className="button button-quiet" href={`tel:${contact.phone}`}>
+                  {contact.phoneDisplay}
                 </a>
               </div>
-            </div>
-          </div>
-          <div className="store-stage" data-reveal data-aperture>
-            <ImageGallery images={storeImages} />
-            <div className="store-quote">
-              <span>ZEIT NEHMEN. ZEIT HABEN.</span>
-              <blockquote>
-                „Ich will, dass Sie
-                <br />
-                Sehen erleben.“
-              </blockquote>
-              <p>
-                Joachim Skorupa
-                <br />
-                <span>Augenoptikermeister & Inhaber</span>
-              </p>
-            </div>
-          </div>
-          <div className="site-shell">
-            <div className="store-footnote">
-              <span>Unser Geschäft. Ihr Raum für einen neuen Blick.</span>
-              <span>Kleine Brüdergasse 1 · Dresden</span>
-            </div>
-            <details id="geschichte" className="history-disclosure">
-              <summary>
-                <span className="chapter-index">1936 — HEUTE</span>
-                <span>Ein Name. Viele Kapitel.</span>
-                <Plus size={22} strokeWidth={1} />
-              </summary>
-              <div className="history-content">
-                <figure>
-                  <Image
-                    src="/images/schorcht/Freiberger-Strasse.jpg"
-                    width={800}
-                    height={600}
-                    alt="Historische Aufnahme des Geschäfts Optiker Schorcht in der Freiberger Straße"
-                  />
-                  <figcaption>
-                    Ein Kapitel unserer Geschichte: die Freiberger Straße.
-                  </figcaption>
-                </figure>
+              <dl className="hero-facts">
                 <div>
-                  {blickPages.ruckblick.paragraphs.map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                  ))}
-                </div>
-              </div>
-            </details>
-          </div>
-        </section>
-
-        <section
-          id="anblick"
-          className="frames-section paper-section"
-          aria-labelledby="frames-heading"
-        >
-          <div className="site-shell">
-            <Chapter
-              number="02"
-              name="Anblick"
-              detail="Ihr Gesicht. Meine Inspiration."
-            />
-            <div className="collection-heading">
-              <h2 id="frames-heading" data-reveal>
-                Nicht irgendeine.
-                <br />
-                <em>Ihre.</em>
-              </h2>
-              <div>
-                <p>
-                  Markant, sportlich oder elegant.
-                  <br />
-                  Wir finden Ihren eigenen Stil.
-                </p>
-                <span className="small-heading">Sie wählen. Ich berate.</span>
-              </div>
-            </div>
-          </div>
-          <FrameCollection />
-        </section>
-
-        <section
-          id="durchblick"
-          className="precision-section"
-          aria-labelledby="precision-heading"
-        >
-          <div className="site-shell">
-            <Chapter
-              number="03"
-              name="Durchblick"
-              detail="Präzision für Ihren Alltag."
-            />
-            <div className="precision-layout">
-              <div className="precision-copy">
-                <span className="small-heading">
-                  Ihre Augen.
-                  <br />
-                  Meine Profession.
-                </span>
-                <h2 id="precision-heading" data-reveal>
-                  Genau
-                  <br />
-                  <em>Ihr Blick.</em>
-                </h2>
-                <p>
-                  Eine passende Brille beginnt mit genauem Hinsehen. Mit
-                  präziser Brillenglasbestimmung und dem Blick auf Ihre
-                  Sehgewohnheiten finden wir Ihre Lösung.
-                </p>
-                <a href="#termin" className="text-link">
-                  Sehanalyse anfragen <ArrowUpRight size={18} />
-                </a>
-              </div>
-              <figure className="precision-image">
-                <span
-                  className="measurement-corner corner-tl"
-                  aria-hidden="true"
-                />
-                <span
-                  className="measurement-corner corner-tr"
-                  aria-hidden="true"
-                />
-                <span
-                  className="measurement-corner corner-bl"
-                  aria-hidden="true"
-                />
-                <span
-                  className="measurement-corner corner-br"
-                  aria-hidden="true"
-                />
-                <Image
-                  src="/images/schorcht/visionix.png"
-                  width={649}
-                  height={800}
-                  sizes="(max-width:800px) 90vw, 44vw"
-                  alt="Visionix 120 für die persönliche Sehanalyse bei Optik Schorcht"
-                />
-                <figcaption>
-                  <span>VISIONIX 120</span>
-                  <span>3D-REFRAKTION</span>
-                </figcaption>
-              </figure>
-            </div>
-            <div className="precision-steps">
-              <div>
-                <span>01</span>
-                <h3>Verstehen.</h3>
-                <p>
-                  Ihre Wünsche. Ihre Sehgewohnheiten.
-                  <br />
-                  Ihr Alltag.
-                </p>
-              </div>
-              <div>
-                <span>02</span>
-                <h3>Messen.</h3>
-                <p>
-                  Präzise Brillenglasbestimmung.
-                  <br />
-                  Mit Zeit für Genauigkeit.
-                </p>
-              </div>
-              <div>
-                <span>03</span>
-                <h3>Abstimmen.</h3>
-                <p>
-                  Beim Lesen, am Bildschirm,
-                  <br />
-                  im Auto oder beim Sport.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="rundblick"
-          className="contacts-section paper-section"
-          aria-labelledby="contacts-heading"
-        >
-          <div className="site-shell">
-            <Chapter
-              number="04"
-              name="Rundblick"
-              detail="Kontakt mit dem fast Unsichtbaren."
-            />
-            <div className="contacts-layout">
-              <div className="lens-study" data-reveal>
-                <span className="lens-study-label">Klein im Format.</span>
-                <figure>
-                  <Image
-                    src="/images/schorcht/71578755.jpg"
-                    fill
-                    sizes="(max-width:800px) 85vw, 40vw"
-                    alt="Eine transparente Kontaktlinse auf einer Fingerspitze"
-                  />
-                </figure>
-                <span className="lens-study-caption">
-                  Individuell in der Anpassung.
-                </span>
-              </div>
-              <div className="contacts-copy">
-                <h2 id="contacts-heading" data-reveal>
-                  Fast unsichtbar.
-                  <br />
-                  <em>Ganz Sie.</em>
-                </h2>
-                <p>
-                  Sehen ohne Brille. Für jeden Tag oder manchmal. Mit
-                  persönlicher Beratung, Hornhaut-Topographie und individueller
-                  Anpassung finden wir die passenden Kontaktlinsen für Ihre
-                  Augen.
-                </p>
-                <div className="lens-types">
-                  <span>Weich.</span>
-                  <span>Formstabil.</span>
-                  <span>Multifokal.</span>
-                </div>
-                <p className="contacts-aftercare">
-                  Auch danach bleiben wir mit regelmäßigen Kontrollen und den
-                  passenden Pflegemitteln für Sie da.
-                </p>
-                <a href="#termin" className="text-link">
-                  Kontaktlinsen kennenlernen <ArrowUpRight size={18} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="weitblick"
-          className="care-section paper-section"
-          aria-labelledby="care-heading"
-        >
-          <div className="site-shell">
-            <Chapter
-              number="05"
-              name="Weitblick"
-              detail="Service. Sicherheit. Ein gutes Gefühl."
-            />
-            <h2 id="care-heading" data-reveal>
-              Wir sind für Sie da.
-              <br />
-              <em>Auch danach.</em>
-            </h2>
-            <div className="care-layout">
-              <figure className="care-image">
-                <Image
-                  src="/images/schorcht/start04.jpg"
-                  fill
-                  sizes="(max-width:800px) 100vw, 32vw"
-                  alt="Beratungsplätze und Empfang im Geschäft von Optik Schorcht"
-                />
-                <figcaption>
-                  Ihr Sehkomfort ist unser Ziel.
-                  <br />
-                  Ihre Zufriedenheit unser Anspruch.
-                </figcaption>
-              </figure>
-              <div className="service-list">
-                {services.map((service, i) => (
-                  <details key={service.title} open={i === 0}>
-                    <summary>
-                      <span>0{i + 1}</span>
-                      <div>
-                        <small>{service.subtitle}</small>
-                        <h3>{service.title}</h3>
-                      </div>
-                      <Plus size={25} strokeWidth={1} />
-                    </summary>
-                    <div className="service-detail">
-                      <p>{service.text}</p>
-                      {service.link && (
-                        <a
-                          href="https://optik-schorcht.de/wp-content/uploads/2026/08/Brillen_clever_finanzieren.pdf"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-link"
-                        >
-                          Brillenabo / PDF öffnen <ArrowUpRight size={16} />
-                        </a>
-                      )}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="kontakt"
-          className="location-section paper-section"
-          aria-labelledby="location-heading"
-        >
-          <div className="site-shell">
-            <Chapter
-              number="06"
-              name="Kontakt"
-              detail="Zu Hause in Dresdens Mitte."
-            />
-          </div>
-          <div className="location-layout">
-            <figure>
-              <Image
-                src="/images/schorcht/einblick-1.jpg"
-                fill
-                sizes="(max-width:800px) 100vw, 58vw"
-                alt="Das lebendige Haus in der Kleinen Brüdergasse mit Optik Schorcht in Dresden"
-              />
-              <figcaption>Kleine Brüdergasse 1. Unser Zuhause.</figcaption>
-            </figure>
-            <div className="location-information">
-              <span className="small-heading">Kommen Sie herein.</span>
-              <h2 id="location-heading" data-reveal>
-                Mitten
-                <br />
-                <em>in Dresden.</em>
-              </h2>
-              <p>
-                Kleine Brüdergasse 1<br />
-                01067 Dresden · das lebendige Haus
-              </p>
-              <a
-                className="text-link"
-                href={contact.googleMapsUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Anfahrt planen <ArrowUpRight size={18} />
-              </a>
-              <dl>
-                <div>
-                  <dt>Montag – Freitag</dt>
-                  <dd>09:00 – 18:00 Uhr</dd>
+                  <dt>Heute</dt>
+                  <dd>
+                    <OpenNow fallback="Mo – Fr 9 – 18 Uhr" />
+                  </dd>
                 </div>
                 <div>
-                  <dt>Samstag</dt>
-                  <dd>nach Vereinbarung</dd>
+                  <dt>Wo</dt>
+                  <dd>
+                    {contact.street}, {contact.building}
+                  </dd>
                 </div>
               </dl>
-              <a className="location-phone" href={`tel:${contact.phone}`}>
-                {contact.phoneDisplay} <ArrowUpRight size={23} />
-              </a>
-              <a className="location-email" href={`mailto:${contact.email}`}>
-                {contact.email}
-              </a>
+            </div>
+            <figure className="hero-figure">
+              <div className="wall">
+                <Image
+                  src={hero.image.src}
+                  width={hero.image.width}
+                  height={hero.image.height}
+                  alt={hero.image.alt}
+                  loading="eager"
+                  sizes="(max-width: 860px) 92vw, 44vw"
+                />
+              </div>
+              <figcaption>{hero.caption}</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------------- */}
+        <section id="einblick" className="letter" aria-labelledby="letter-title">
+          <div className="shell letter-grid">
+            <figure className="letter-photo">
+              <Image
+                src={letter.image.src}
+                width={letter.image.width}
+                height={letter.image.height}
+                alt={letter.image.alt}
+                sizes="(max-width: 860px) 92vw, 38vw"
+              />
+            </figure>
+            <div className="letter-text">
+              <p className="label">Bei mir</p>
+              <h2 id="letter-title">{letter.heading}</h2>
+              {letter.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <p className="signature">
+                {site.owner}
+                <span>
+                  {site.ownerTitle} und Inhaber
+                </span>
+              </p>
             </div>
           </div>
         </section>
-        <section
-          id="termin"
-          className="appointment-section"
-          aria-labelledby="appointment-heading"
-        >
-          <div className="site-shell">
-            <Chapter
-              number="07"
-              name="Zeit für Ihren Blick"
-              detail="Persönlich. Und ganz in Ruhe."
-            />
-            <div className="appointment-layout">
-              <div className="booking-intro">
-                <h2 id="appointment-heading" data-reveal>
-                  Sehen
-                  <br />
-                  <em>wir uns?</em>
-                </h2>
-                <p>
-                  Für einen neuen Blick braucht es
-                  <br />
-                  manchmal nur ein erstes Gespräch.
-                </p>
-                <a href={`tel:${contact.phone}`} className="text-link">
-                  Lieber direkt anrufen <ArrowUpRight size={18} />
-                </a>
-              </div>
-              <AppointmentForm />
+
+        {/* ---------------------------------------------------------------- */}
+        <section className="services" aria-labelledby="services-title">
+          <div className="shell">
+            <header className="section-head">
+              <p className="label">Was ich für Sie tue</p>
+              <h2 id="services-title">Vier Blicke auf gutes Sehen.</h2>
+            </header>
+
+            {services.map((service) => (
+              <article key={service.id} id={service.id} className="service" aria-labelledby={`${service.id}-title`}>
+                <div className="service-name">
+                  <h3 id={`${service.id}-title`}>
+                    <span className="service-blick">{service.name}</span>
+                    <span className="service-topic">{service.topic}</span>
+                  </h3>
+                </div>
+                <div className="service-body">
+                  <p className="service-lead">{service.lead}</p>
+                  {service.text.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                  <ul className="service-points">
+                    {service.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                  <a className="text-link" href="#termin">
+                    {service.cta}
+                  </a>
+                </div>
+                <figure className={`service-image${service.image.fit === "contain" ? " is-object" : ""}`}>
+                  <Image
+                    src={service.image.src}
+                    width={service.image.width}
+                    height={service.image.height}
+                    alt={service.image.alt}
+                    sizes="(max-width: 860px) 92vw, 30vw"
+                  />
+                </figure>
+              </article>
+            ))}
+
+            <ul className="promises">
+              {promises.map((promise) => (
+                <li key={promise.title}>
+                  <h3>{promise.title}</h3>
+                  <p>{promise.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------------- */}
+        <section className="frames" aria-labelledby="frames-title">
+          <div className="shell">
+            <header className="section-head section-head-row">
+              <h2 id="frames-title">Aus unseren Schubladen.</h2>
+              <p>Eine kleine Auswahl. Den Rest zeige ich Ihnen am liebsten im Laden – mit Spiegel und gutem Licht.</p>
+            </header>
+            <div className="frames-grid">
+              {frames.map((frame) => (
+                <figure key={frame.src}>
+                  <Image src={frame.src} width={800} height={600} alt={frame.alt} sizes="(max-width: 700px) 92vw, 31vw" />
+                  <figcaption>{frame.caption}</figcaption>
+                </figure>
+              ))}
             </div>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------------- */}
+        <section id="geschichte" className="history" aria-labelledby="history-title">
+          <div className="shell">
+            <header className="section-head">
+              <p className="label">Rückblick</p>
+              <h2 id="history-title">
+                Ein Name.
+                <br />
+                Viele Kapitel.
+              </h2>
+              <p className="history-intro">
+                Seit {site.founded} gibt es Optik Schorcht in Dresden. Das Geschäft ist mehrmals umgezogen, einmal
+                ausgebombt und einmal überflutet worden. Geblieben sind der Name und die Freude an der Augenoptik.
+              </p>
+            </header>
+            <ol className="timeline">
+              {history.map((entry) => (
+                <li key={entry.year + entry.title} className={"image" in entry ? "has-image" : undefined}>
+                  <p className="timeline-year">{entry.year}</p>
+                  <div className="timeline-text">
+                    <h3>{entry.title}</h3>
+                    <p>{entry.text}</p>
+                  </div>
+                  {"image" in entry && entry.image && (
+                    <figure className="archive-print">
+                      <Image src={entry.image.src} width={800} height={600} alt={entry.image.alt} sizes="(max-width: 860px) 80vw, 340px" />
+                      <figcaption>{entry.image.caption}</figcaption>
+                    </figure>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------------- */}
+        <section id="besuch" className="visit" aria-labelledby="visit-title">
+          <div className="shell visit-grid">
+            <div className="visit-text">
+              <p className="label">Anfahrt</p>
+              <h2 id="visit-title">Mitten in der Altstadt.</h2>
+              <p>
+                Sie finden uns in der Kleinen Brüdergasse 1, {contact.building} – nur ein paar Schritte von der
+                Straßenbahn-Haltestelle Postplatz entfernt.
+              </p>
+              <table className="hours">
+                <caption>Öffnungszeiten</caption>
+                <tbody>
+                  {openingHours.map((entry) => (
+                    <tr key={entry.day}>
+                      <th scope="row">{entry.label}</th>
+                      <td>{entry.from ? `${entry.from} – ${entry.to} Uhr` : entry.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="visit-links">
+                <a className="text-link" href={contact.mapsUrl} target="_blank" rel="noopener noreferrer">
+                  Route in Google Maps öffnen
+                </a>
+                <a className="text-link" href={`tel:${contact.phone}`}>
+                  {contact.phoneDisplay} anrufen
+                </a>
+              </p>
+            </div>
+            <Sehtafel />
+            <figure className="visit-photo">
+              <Image
+                src="/images/laden/lebendiges-haus.jpg"
+                width={1154}
+                height={2400}
+                alt="Das Lebendige Haus an der Kleinen Brüdergasse mit großer Glasfassade"
+                sizes="(max-width: 860px) 92vw, 26vw"
+              />
+              <figcaption>Das Lebendige Haus. Unser Zuhause seit 2003.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------------- */}
+        <section id="termin" className="appointment" aria-labelledby="appointment-title">
+          <div className="shell appointment-grid">
+            <div className="appointment-text">
+              <Dots className="appointment-dots" />
+              <h2 id="appointment-title">Sehen wir uns?</h2>
+              <p>
+                Am schnellsten geht es per Telefon. Wenn Sie lieber schreiben: Sagen Sie mir kurz, worum es geht und
+                wann es Ihnen passt. Ich melde mich.
+              </p>
+              <a className="appointment-phone" href={`tel:${contact.phone}`}>
+                {contact.phoneDisplay}
+              </a>
+              <p className="appointment-hours">
+                {hoursShort.map((row) => (
+                  <span key={row.days}>
+                    {row.days}: {row.time}
+                  </span>
+                ))}
+              </p>
+            </div>
+            <AppointmentForm />
           </div>
         </section>
       </main>
-      <Footer compact />
-      <EditorialMotion />
+      <Footer />
+      <MobileBar />
     </>
   );
 }
