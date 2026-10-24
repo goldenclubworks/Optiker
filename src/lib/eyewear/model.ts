@@ -75,7 +75,7 @@ function lensGeometry() {
 export function createEyewearModel(shopTextures:THREE.Texture[]=[]): EyewearModel {
   const root = new THREE.Group();
   root.name = "schorcht-eyewear";
-  const material = new THREE.MeshPhysicalMaterial({ color: '#343331', roughness: .18, metalness: 0, transmission:.12,thickness:.28,ior:1.48,clearcoat:1,clearcoatRoughness:.12,envMapIntensity:1.1 });
+  const material = new THREE.MeshPhysicalMaterial({ color: '#342a28', roughness: .12, metalness: 0, transmission:.2,thickness:.28,ior:1.48,clearcoat:1,clearcoatRoughness:.07,envMapIntensity:1.2 });
   const bordeaux=new THREE.MeshPhysicalMaterial({color:'#642838',roughness:.2,transmission:.16,thickness:.2,ior:1.48,clearcoat:1,clearcoatRoughness:.14});
   const metal=new THREE.MeshStandardMaterial({color:'#bcb6a6',metalness:1,roughness:.23,envMapIntensity:1.4});
   const lensMaterial=new THREE.MeshPhysicalMaterial({color:'#ecf0e8',roughness:.035,metalness:0,transmission:1,thickness:.055,ior:1.51,envMapIntensity:.8});
@@ -135,7 +135,7 @@ export function createEyewearModel(shopTextures:THREE.Texture[]=[]): EyewearMode
             float diagonal=vUv.y+vUv.x*.21;
             float glint=exp(-pow((diagonal-.91)/.025,2.0))*.52+exp(-pow((diagonal-.98)/.006,2.0))*.4;
             vec3 color=mix(photo,vec3(.98,.96,.9),glint);
-            float alpha=clamp(strength+fresnel*.22+glint*.18,0.0,.78);
+            float alpha=clamp(strength+fresnel*.32+glint*.22,0.0,.66);
             gl_FragColor=vec4(color,alpha);
             #include <tonemapping_fragment>
             #include <colorspace_fragment>

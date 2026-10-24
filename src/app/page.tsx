@@ -69,28 +69,44 @@ export default function HomePage() {
               name="Einblick"
               detail="Persönlich. Seit 1936."
             />
-            <h2 id="intro-heading" className="statement" data-reveal>
-              Eine Brille, die
-              <br />
-              zu <span>Ihnen</span> gehört.
-            </h2>
-            <div className="intro-bottom">
-              <span className="small-heading">
-                Tradition trifft
+            <div className="intro-composition">
+              <h2 id="intro-heading" className="statement" data-reveal>
+                Eine Brille,
                 <br />
-                Innovation.
-              </span>
-              <p>
-                Sehen und Aussehen. Beides habe ich für Sie im Blick. Mit Freude
-                am Handwerk, einem offenen Ohr und Zeit für das, was Ihnen
-                wichtig ist.
-              </p>
-              <a href="#termin" className="text-link">
-                Lernen wir uns kennen <ArrowUpRight size={18} />
-              </a>
+                die zu <em>Ihnen</em>
+                <br />
+                gehört.
+              </h2>
+              <div className="intro-personal">
+                <span className="optical-mark" aria-hidden="true">
+                  {Array.from({ length: 25 }, (_, i) => (
+                    <i
+                      key={i}
+                      style={{
+                        transform: `scale(${Math.max(0.2, 1 - (Math.abs((i % 5) - 2) + Math.abs(Math.floor(i / 5) - 2)) * 0.18)})`,
+                      }}
+                    />
+                  ))}
+                </span>
+                <span className="small-heading">
+                  Tradition trifft Innovation.
+                  <br />
+                  Und auf Sie.
+                </span>
+                <p>
+                  Sehen und Aussehen. Beides habe ich für Sie im Blick. Mit
+                  Freude am Handwerk, einem offenen Ohr und Zeit für das, was
+                  Ihnen wichtig ist.
+                </p>
+                <span className="owner-name">Joachim Skorupa</span>
+                <small>Augenoptikermeister & Inhaber</small>
+                <a href="#termin" className="text-link">
+                  Lernen wir uns kennen <ArrowUpRight size={18} />
+                </a>
+              </div>
             </div>
           </div>
-          <div className="store-stage" data-reveal>
+          <div className="store-stage" data-reveal data-aperture>
             <ImageGallery images={storeImages} />
             <div className="store-quote">
               <span>ZEIT NEHMEN. ZEIT HABEN.</span>
@@ -154,7 +170,7 @@ export default function HomePage() {
               <h2 id="frames-heading" data-reveal>
                 Nicht irgendeine.
                 <br />
-                <span>Ihre.</span>
+                <em>Ihre.</em>
               </h2>
               <div>
                 <p>
@@ -190,7 +206,7 @@ export default function HomePage() {
                 <h2 id="precision-heading" data-reveal>
                   Genau
                   <br />
-                  Ihr Blick.
+                  <em>Ihr Blick.</em>
                 </h2>
                 <p>
                   Eine passende Brille beginnt mit genauem Hinsehen. Mit
@@ -293,7 +309,7 @@ export default function HomePage() {
                 <h2 id="contacts-heading" data-reveal>
                   Fast unsichtbar.
                   <br />
-                  <span>Ganz Sie.</span>
+                  <em>Ganz Sie.</em>
                 </h2>
                 <p>
                   Sehen ohne Brille. Für jeden Tag oder manchmal. Mit
@@ -332,7 +348,7 @@ export default function HomePage() {
             <h2 id="care-heading" data-reveal>
               Wir sind für Sie da.
               <br />
-              <span>Auch danach.</span>
+              <em>Auch danach.</em>
             </h2>
             <div className="care-layout">
               <figure className="care-image">
@@ -406,7 +422,7 @@ export default function HomePage() {
               <h2 id="location-heading" data-reveal>
                 Mitten
                 <br />
-                in Dresden.
+                <em>in Dresden.</em>
               </h2>
               <p>
                 Kleine Brüdergasse 1<br />
@@ -455,7 +471,7 @@ export default function HomePage() {
                 <h2 id="appointment-heading" data-reveal>
                   Sehen
                   <br />
-                  wir uns?
+                  <em>wir uns?</em>
                 </h2>
                 <p>
                   Für einen neuen Blick braucht es
