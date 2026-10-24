@@ -43,7 +43,7 @@ Impressum und Datenschutz liegen in `src/app/impressum/page.tsx` und `src/app/da
 
 Diese Punkte konnte ich nicht selbst klären. Auf der Website sind sie entweder neutral formuliert oder deutlich markiert:
 
-1. **Hosting-Anbieter** für die Datenschutzerklärung eintragen (`legal.host` in `site.ts`). Bis dahin steht dort ein gelb markierter Platzhalter. Mit dem Anbieter muss ein Vertrag zur Auftragsverarbeitung bestehen.
+1. **Hosting bei Vercel:** In der Datenschutzerklärung eingetragen. Den Vertrag zur Auftragsverarbeitung (DPA) bei Vercel abschließen bzw. akzeptieren: https://vercel.com/legal/dpa
 2. **Verträglichkeitsgarantie:** Die alte Website nannte an einer Stelle 12, an einer anderen 24 Monate. Bitte die richtige Zahl nennen, dann kommt sie in den Text.
 3. **Brillenabo:** Konditionen (12 / 24 Raten, zinslos?) bestätigen. Das bisherige PDF lag auf der alten WordPress-Seite und ist nach dem Umzug nicht mehr erreichbar. Wenn es weiter angeboten werden soll, die Datei nach `public/` legen.
 4. **Öffnungszeiten** Mo–Fr 9–18 Uhr, Samstag nach Vereinbarung: noch aktuell?

@@ -37,12 +37,18 @@ export default function DatenschutzPage() {
 
           <h2>2. Aufruf der Website und Hosting</h2>
           <p>
-            Die Website wird betrieben bei: <span className="placeholder">{legal.host}</span>. Beim Aufruf verarbeitet
+            Die Website wird bei {legal.host} gehostet. Beim Aufruf verarbeitet
             der Server technisch notwendige Daten, die Ihr Browser übermittelt: IP-Adresse, Datum und Uhrzeit, die
             aufgerufene Seite, Referrer-URL sowie Browser- und Betriebssystemangaben. Das ist nötig, um die Seite
             auszuliefern und ihre Sicherheit zu gewährleisten (Art. 6 Abs. 1 lit. f DSGVO). Die Protokolle werden
-            vom Hosting-Anbieter nach kurzer Zeit gelöscht und nicht mit anderen Daten zusammengeführt. Mit dem
-            Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.
+            vom Hosting-Anbieter nach kurzer Zeit gelöscht und nicht mit anderen Daten zusammengeführt. Mit Vercel
+            besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Vercel kann Daten auch in den USA
+            verarbeiten. Das Unternehmen ist nach dem EU-US Data Privacy Framework zertifiziert, für das ein
+            Angemessenheitsbeschluss der EU-Kommission besteht (Art. 45 DSGVO). Mehr dazu:{" "}
+            <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">
+              Datenschutzerklärung von Vercel
+            </a>
+            .
           </p>
 
           <h2>3. Cookies und Tracking</h2>

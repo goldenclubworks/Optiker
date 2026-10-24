@@ -283,6 +283,6 @@ export const legal = {
   chamberUrl: "https://www.hwk-dresden.de/",
   regulation: "Gesetz zur Ordnung des Handwerks (Handwerksordnung)",
   regulationUrl: "https://www.gesetze-im-internet.de/hwo/",
-  // PLATZHALTER: Name und Anschrift des Hosting-Anbieters (für die Datenschutzerklärung)
-  host: "PLATZHALTER: Hosting-Anbieter mit Anschrift",
+  // Hosting-Anbieter (für die Datenschutzerklärung)
+  host: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA",
 } as const;
